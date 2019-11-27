@@ -1,0 +1,312 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+/* header */
+.flash {
+  font-size: 20px;
+  background-color:#CC6633;
+  color: white;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid silver;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.header-top {
+  height: 60px;
+  display: flex;
+  justify-content:space-between;
+  color: rgb(100, 100, 100);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-logo img {
+  height: 60px;
+  margin-right: 15px;
+}
+
+.header-logo h1 {
+  font-size: 32px;
+}
+
+.header-login a {
+  line-height: 60px;
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+}
+
+.header-tab {
+  display: flex;
+  font-size: 20px;
+}
+
+.header-tab {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.header-tab li {
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+.header-tab a {
+  color: #333333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header-tab a:hover {
+  color: navy;
+}
+
+.active {
+  border-bottom: 5px solid navy;
+}
+
+.active a {
+  color: navy;
+}
+/* header終わり*/
+
+/* 月別一覧 */
+#cv1 {
+  margin-top: 20px;
+}
+
+.months-wrapper {
+  width: 1140px;
+  margin: 0 auto;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.month-index {
+  width: 40px;
+}
+  
+.month {
+  position: relative;
+  width: 16%;
+  text-align: center;
+}
+/* 月別一覧 終わり */
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://school.oohara.jp/rtakagi/datepicker.js"></script>
+<link rel="stylesheet" href="http://school.oohara.jp/rtakagi/datepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
+        <h1>household acount</h1>
+      </div>
+      <div class="header-login">
+        <%= link_to 'ログイン', new_user_session_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
+      </div>
+    </div>
+
+    <ul class="header-tab">
+      <li><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
+      <li class="active"><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
+      <li><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="container">
+  
+  
+  <canvas id="cv1" height="560" width="1140"></canvas>
+  
+  
+  
+  
+  
+  
+  <div class="months-wrapper">
+    <div class="month-index">
+      <h3>収入</h3>
+      <h3>支出</h3>
+      <h3>収支</h3>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu1 %>円</h3>
+      <h3 class="red"><%= @sousisyutu1 %>円</h3>
+      <h3><%= @sousyunyu1 - @sousisyutu1 %>円</h3>
+      <%= link_to "#{@baseday.prev_month(5).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(5).year}&month=#{@baseday.prev_month(5).month}" %>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu2 %>円</h3>
+      <h3 class="red"><%= @sousisyutu2 %>円</h3>
+      <h3><%= @sousyunyu2 - @sousisyutu2 %>円</h3>
+      <%= link_to "#{@baseday.prev_month(4).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(4).year}&month=#{@baseday.prev_month(4).month}" %>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu3 %>円</h3>
+      <h3 class="red"><%= @sousisyutu3 %>円</h3>
+      <h3><%= @sousyunyu3 - @sousisyutu3 %>円</h3>
+      <%= link_to "#{@baseday.prev_month(3).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(3).year}&month=#{@baseday.prev_month(3).month}" %>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu4 %>円</h3>
+      <h3 class="red"><%= @sousisyutu4 %>円</h3>
+      <h3><%= @sousyunyu4 - @sousisyutu4 %>円</h3>
+      <%= link_to "#{@baseday.prev_month(2).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(2).year}&month=#{@baseday.prev_month(2).month}" %>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu5 %>円</h3>
+      <h3 class="red"><%= @sousisyutu5 %>円</h3>
+      <h3><%= @sousyunyu5 - @sousisyutu5 %>円</h3>
+      <%= link_to "#{@baseday.prev_month(1).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(1).year}&month=#{@baseday.prev_month(1).month}" %>
+    </div>
+    <div class="month">
+      <h3 class="blue"><%= @sousyunyu6 %>円</h3>
+      <h3 class="red"><%= @sousisyutu6 %>円</h3>
+      <h3><%= @sousyunyu6 - @sousisyutu6 %>円</h3>
+      <%= link_to "#{@baseday.month}月詳細へ", "/posts/month?year=#{@baseday.year}&month=#{@baseday.month}" %>
+    </div>
+  </div>
+</div>
+
+<script>
+var ctx = document.getElementById('cv1').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['<%= @baseday.prev_month(5).month %>月', '<%= @baseday.prev_month(4).month %>月', '<%= @baseday.prev_month(3).month %>月', '<%= @baseday.prev_month(2).month %>月', '<%= @baseday.prev_month(1).month %>月', '<%= @baseday.month %>月'],
+    datasets: [{
+      label: '食費',
+      data: [<%= @syokuhi1 %>, <%= @syokuhi2 %>, <%= @syokuhi3 %>, <%= @syokuhi4 %>, <%= @syokuhi5 %>,  <%= @syokuhi6 %>],
+      backgroundColor: "blue"
+    }, {
+      label: '日用品',
+      data: [<%= @nitiyouhin1 %>, <%= @nitiyouhin2 %>, <%= @nitiyouhin3 %>, <%= @nitiyouhin4 %>, <%= @nitiyouhin5 %>,  <%= @nitiyouhin6 %>],
+      backgroundColor: "lime"
+    }, {
+      label: '衣服・美容費',
+      data: [<%= @ihuku1 %>, <%= @ihuku2 %>, <%= @ihuku3 %>, <%= @ihuku4 %>, <%= @ihuku5 %>, <%= @ihuku6 %>],
+      backgroundColor: "yellow"
+    }, {
+      label: '娯楽費',
+      data: [<%= @goraku1 %>, <%= @goraku2 %>, <%= @goraku3 %>, <%= @goraku4 %>, <%= @goraku5 %>, <%= @goraku6 %>],
+      backgroundColor: "pink"
+    }, {
+      label: '交通費',
+      data: [<%= @koutuu1 %>, <%= @koutuu2 %>, <%= @koutuu3 %>, <%= @koutuu4 %>, <%= @koutuu5 %>, <%= @koutuu6 %>],
+      backgroundColor: "aqua"
+    }, {
+      label: '教養費',
+      data: [<%= @kyouyou1 %>, <%= @kyouyou2 %>, <%= @kyouyou3 %>, <%= @kyouyou4 %>, <%= @kyouyou5 %>, <%= @kyouyou6 %>],
+      backgroundColor: "fuchsia"
+    }, {
+      label: '医療費',
+      data: [<%= @iryou1 %>, <%= @iryou2 %>, <%= @iryou3 %>, <%= @iryou4 %>, <%= @iryou5 %>, <%= @iryou6 %>],
+      backgroundColor: "olive"
+    }, {
+      label: '交際費',
+      data: [<%= @kousai1 %>, <%= @kousai2 %>, <%= @kousai3 %>, <%= @kousai4 %>, <%= @kousai5 %>, <%= @kousai6 %>],
+      backgroundColor: "navy"
+    }, {
+      label: 'その他',
+      data: [<%= @sonota_1_1 %>, <%= @sonota_1_2 %>, <%= @sonota_1_3 %>, <%= @sonota_1_4 %>, <%= @sonota_1_5 %>, <%= @sonota_1_6 %>],
+      backgroundColor: "silver"
+    }, {
+      label: '特別支出',
+      data: [<%= @tokubetu1 %>, <%= @tokubetu2 %>, <%= @tokubetu3 %>, <%= @tokubetu4 %>, <%= @tokubetu5 %>, <%= @tokubetu6 %>],
+      backgroundColor: "red"
+    }, {
+      label: '住居費',
+      data: [<%= @juukyo1 %>, <%= @juukyo2 %>, <%= @juukyo3 %>, <%= @juukyo4 %>, <%= @juukyo5 %>, <%= @juukyo6 %>],
+      backgroundColor: "green"
+    }, {
+      label: '電気代',
+      data: [<%= @denki1 %>, <%= @denki2 %>, <%= @denki3 %>, <%= @denki4 %>, <%= @denki5 %>, <%= @denki6 %>],
+      backgroundColor: "maroon"
+    }, {
+      label: 'ガス代',
+      data: [<%= @gasu1 %>, <%= @gasu2 %>, <%= @gasu3 %>, <%= @gasu4 %>, <%= @gasu5 %>, <%= @gasu6 %>],
+      backgroundColor: "fuchsia"
+    }, {
+      label: '水道代',
+      data: [<%= @suidou1 %>, <%= @suidou2 %>, <%= @suidou3 %>, <%= @suidou4 %>, <%= @suidou5 %>, <%= @suidou6 %>],
+      backgroundColor: "blue"
+    }, {
+      label: '通信・電話代',
+      data: [<%= @tuusin1 %>, <%= @tuusin2 %>, <%= @tuusin3 %>, <%= @tuusin4 %>, <%= @tuusin5 %>, <%= @tuusin6 %>],
+      backgroundColor: "purple"
+    }, {
+      label: '携帯電話代',
+      data: [<%= @keitai1 %>, <%= @keitai2 %>, <%= @keitai3 %>, <%= @keitai4 %>, <%= @keitai5 %>, <%= @keitai6 %>],
+      backgroundColor: "teal"
+    }]},
+  options: {
+    responsive: false,
+    scales: {
+      xAxes: [{
+        stacked: true,
+        ticks: {
+          fontSize: 20
+        }
+      }],
+      yAxes: [{stacked: true}]
+    },
+    legend: {
+      labels: {
+        fontSize: 16,
+        boxWidth: 55
+      }
+    }
+  }
+});
+</script>

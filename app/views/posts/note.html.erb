@@ -1,0 +1,838 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+/* header */
+.flash {
+  font-size: 20px;
+  background-color:#CC6633;
+  color: white;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid silver;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.header-top {
+  height: 60px;
+  display: flex;
+  justify-content:space-between;
+  color: rgb(100, 100, 100);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-logo img {
+  height: 60px;
+  margin-right: 15px;
+}
+
+.header-logo h1 {
+  font-size: 32px;
+}
+
+.header-login a {
+  line-height: 60px;
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+}
+
+.header-tab {
+  display: flex;
+  font-size: 20px;
+}
+
+.header-tab {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.header-tab li {
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+.header-tab a {
+  color: #333333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header-tab a:hover {
+  color: navy;
+}
+
+.active {
+  border-bottom: 5px solid navy;
+}
+
+.active a {
+  color: navy;
+}
+/* header終わり*/
+
+
+/* top-quick-entry*/
+.quick-entry {
+  width: 500px;
+  margin: 10px;
+}
+
+.section-title {
+  font-size: 30px;
+  border-bottom: 5px solid silver;
+  margin-bottom: 15px;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.quick-entry form {
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.field {
+  width: 450px;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.field label {
+  width: 120px;
+  float: left;
+}
+
+.field input {
+  height: 30px;
+  font-size: 20px;
+  border: 1px solid gray;
+}
+
+.field input:focus {
+  border: 1px solid blue;
+}
+
+.field select {
+  height: 30px;
+  font-size: 20px;
+}
+
+.actions input {
+  height: 40px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  background-color: navy;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.actions input:hover {
+  background-color: blue;
+  cursor: pointer;
+  transition: .5s;
+}
+
+/* quick-entry内 項目部分 */
+ul.menu {
+  cursor: pointer;
+}
+
+ul.menu:after {
+  height: 0;
+  visibility: hidden;
+  content: ".";
+  display: block;
+  clear: both;
+}
+
+ul.menu li {
+  float: left;
+  width: 154px;
+  height: 30px;
+  background-color: white;
+  position: relative;
+}
+
+ul.menu > li {
+  margin-right: 10px;
+  border: 1px solid #999;
+}
+
+ul.menu li > ul {
+  position: relative;
+  top: 1px;
+  left: -1px;
+  border: 1px solid #999;
+}
+
+ul.menu li a {
+  display: block;
+  width: 100%;
+  height: 99%;
+  line-height: 30px;
+  font-size: 20px;
+  text-indent: 5px;
+  color: #111;
+  text-decoration: none;
+  position: relative;
+}
+
+ul.menu i {
+  float: right;
+  padding-right: 10px;
+  padding-top: 5px;
+  color: silver;
+}
+
+ul.sub li a:hover {
+  background-color: #005FFF;
+  color: white;
+}
+
+ul.sub li {
+  float: none;
+  width: 100%;
+  border-box: 1px solid #999;
+}
+
+ul.sub li ul.sub {
+  position: absolute;
+  left: 152px;
+  top: 0;
+  z-index: 10;
+}
+
+ul.sub {
+  display: none;
+  width: 154px;
+  z-index: 10;
+}
+
+ul.sub-2 li {
+  width: 151px;
+}
+/* quick-entry内 項目部分 終わり */
+/* top-quick-entry　終わり*/
+
+
+/* 家計簿のCSS */
+.overlay{
+  display: none;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.new-entry {
+  display: none;
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+  padding: 20px 30px 20px;
+  position: fixed;
+  top: 100px;
+  left: calc(50% - 250px);
+  z-index: 11;
+}
+
+.close-btn {
+  font-size: 28px;
+  position: absolute;
+  top: 5px;
+  left: 465px;
+  color: gray;
+}
+
+ul.tab {
+  display: flex;
+  border: 1px solid black;
+}
+
+ul.tab li {
+  line-height: 60px;
+  vertical-align: middle;
+  width: 50%;
+  font-size: 25px;
+  
+  text-align: center;
+  background-color: #ccc;
+}
+
+ul.tab li:hover {
+  cursor: pointer;
+}
+
+li.pay {
+  color: #660000;
+}
+
+li.salary {
+  color: #000055;
+}
+
+.tab li.entry-active {
+  border-bottom: none;
+  background-color: white;
+}
+
+.new-entry form {
+  margin-top: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.event-btn {
+  width: 1140px;
+  margin: 20px 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-btn a:hover {
+  cursor: pointer;
+}
+
+.btn {
+  width: 120px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 2px 15px;
+  background-color: navy;
+  font-weight: bold;
+  color: white;
+  line-height: 30px;
+}
+
+.second-btn {
+  margin-left: 550px;
+  text-align: center;
+  background-color: #CC0000;
+}
+
+.serch-btn {
+  margin-left: 20px;
+  margin-right: 50px;
+}
+
+.serch-btn:hover {
+  cursor: pointer;
+}
+
+.calender {
+  font-size: 18px;
+}
+
+.calender table {
+  margin: 0 auto;
+}
+
+.calender tr {
+  height: 30px;
+}
+
+.calender th {
+  width: 120px;
+}
+
+.calender td {
+  width: 155px;
+  font-size: 16px;
+}
+
+.vertical-row {
+  background-color: #eee;
+}
+
+.weekday-cell {
+  background-color: #eee;
+}
+
+.saturday-cell {
+  background-color: #CCFFFF;
+}
+
+.sunday-cell {
+  background-color: #FFDDFF;
+}
+
+.black-cell {
+  background-color: black;
+  color: white;
+}
+
+.left-justify {
+  text-align: right;
+  padding-right: 7px;
+}
+
+td i.fa-pen {
+  padding-left: 7px;
+  color: blue;
+  display: none;
+}
+/* 家計簿のCSS 終わり */
+</style>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://school.oohara.jp/rtakagi/datepicker.js"></script>
+<link rel="stylesheet" href="http://school.oohara.jp/rtakagi/datepicker.css" />
+
+
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
+        <h1>household acount</h1>
+      </div>
+      <div class="header-login">
+        <%= link_to 'ログイン', new_user_session_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
+      </div>
+    </div>
+
+    <ul class="header-tab">
+      <li><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
+      <li><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
+      <li class="active"><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="overlay"></div>
+<div class="new-entry">
+  <h1>入出金入力</h1>
+  <span class="close-btn"><i class="fas fa-times"></i></span>
+  <ul class="tab">
+    <li class="pay entry-active"><i class="fas fa-shopping-bag"></i> 支出</li>
+    <li class="salary"><i class="fas fa-coins"></i> 収入</li>
+  </ul>
+  
+  
+  <%= form_with model: @post, local: true do |f| %>
+    <div class="field">
+			<%= f.label :date, '日付' %>
+			<span class="today" id="today"></span> <img class="cal1" src="http://school.oohara.jp/yoshikawa/cal.png" width=20px><br>
+			<%= f.hidden_field :date, id: "post-date" %>
+		</div>
+
+		<div class="field tab-change">
+			<%= f.label :price, '支出金額', class: "tab-0" %>
+			<%= f.label :price, '収入金額', class: "tab-1 hide" %>
+			<%= f.text_field :price %><span> 円</span>
+		</div>
+
+
+    
+    <input type="hidden" id="flg" value="0">
+    <div class="field tab-0">
+			<%= f.label :category1, '項目' %>
+			<%= f.hidden_field :category1, id: "category1" %>
+			<%= f.hidden_field :category2, id: "category2" %>
+      <ul class="menu">
+        <li><a id="menuA">未選択 <i class="fas fa-caret-down"></i></a>
+          <ul class="sub">
+            <li><a>生活費 <i class="fas fa-caret-right"></i></a>
+              <ul class="sub">
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('食費');$('#category1').val('1');$('#category2').val('1');">食費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('日用品');$('#category1').val('1');$('#category2').val('2');">日用品</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('衣服・美容費');$('#category1').val('1');$('#category2').val('3');">衣服・美容費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('娯楽費');$('#category1').val('1');$('#category2').val('4');">娯楽費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('交通費');$('#category1').val('1');$('#category2').val('5');">交通費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('教養費');$('#category1').val('1');$('#category2').val('6');">教養費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('医療費');$('#category1').val('1');$('#category2').val('7');">医療費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('交際費');$('#category1').val('1');$('#category2').val('8');">交際費</a></li>
+                <li><a onclick="$('#menuA').html('生活費');$('#menuB').html('その他');$('#category1').val('1');$('#category2').val('9');">その他</a></li>
+              </ul>
+            </li>
+            <li><a>特別支出 <i class="fas fa-caret-right"></i></a>
+              <ul class="sub">
+                <li><a onclick="$('#menuA').html('特別支出');$('#menuB').html('特別支出');$('#category1').val('2');$('#category2').val('10');">特別支出</a></li>
+              </ul>
+            </li>
+            <li><a>固定費 <i class="fas fa-caret-right"></i></a>
+              <ul class="sub">
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('住居費');$('#category1').val('3');$('#category2').val('11');">住居費</a></li>
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('電気代');$('#category1').val('3');$('#category2').val('12');">電気代</a></li>
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('ガス代');$('#category1').val('3');$('#category2').val('13');">ガス代</a></li>
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('水道代');$('#category1').val('3');$('#category2').val('14');">水道代</a></li>
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('通信・電話代');$('#category1').val('3');$('#category2').val('15');">通信・電話代</a></li>
+                <li><a onclick="$('#menuA').html('固定費');$('#menuB').html('携帯電話代');$('#category1').val('3');$('#category2').val('16');">携帯電話代</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a id="menuB">未選択 <i class="fas fa-caret-down"></i></a></li>
+      </ul>
+    </div>
+
+    <div class="field tab-1 hide">
+			<%= f.label :category1, '項目' %>
+      <ul class="menu">
+        <li><a id="menuC">未選択 <i class="fas fa-caret-down"></i></a>
+          <ul class="sub">
+            <li><a onclick="$('#menuC').html('給料');$('#category1').val('4');$('#category2').val('17');">給料</a></li>
+            <li><a onclick="$('#menuC').html('その他');$('#category1').val('4');$('#category2').val('18');">その他</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div style="clear:both"></div>
+    
+    <div class="field">
+			<%= f.label :article, 'メモ' %>
+			<%= f.text_field :article %>
+    </div>
+    <div class="actions">
+			<%= f.submit '登録する' %>
+    </div>
+  <% end %>
+  
+</div>
+
+
+
+
+<div class="container">
+  <div class="event-btn">
+    <a class="btn" href="#"><i class="fas fa-angle-double-left"></i> 前の週へ</a>
+    <a class="btn second-btn"><i class="far fa-edit"></i> 入力</a>
+    <span class="btn serch-btn" href="#"><span class="cal2"><i class="fas fa-search"></i> 週を移動</span></span>
+    <a class="btn"href="#">次の週へ <i class="fas fa-angle-double-right"></i></a>
+  </div>
+
+  
+
+
+
+
+  <div class="calender">
+    <table border="1" width="1140">
+      <tr>
+        <th class="vertical-row black-cell">9月</th>
+        <th class="weekday-cell"><%= @monday.day %>日(月)</th>
+        <th class="weekday-cell"><%= @tuesday.day %>日(火)</th>
+        <th class="weekday-cell"><%= @wednesday.day %>日(水)</th>
+        <th class="weekday-cell"><%= @thursday.day %>日(木)</th>
+        <th class="weekday-cell"><%= @friday.day %>日(金)</th>
+        <th class="saturday-cell"><%= @saturday.day %>日(土)</th>
+        <th class="sunday-cell"><%= @sunday.day %>日(日)</th>
+      </tr>
+      <tr>
+        <th class="vertical-row" rowspan="12">項目</th>
+        <% if @mon[0] %>
+          <td><%= link_to "#{@mon[0].article} #{@mon[0].price}円", edit_post_path(@mon[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @tue[0] %>
+          <td><%= link_to "#{@tue[0].article} #{@tue[0].price}円", edit_post_path(@tue[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @wed[0] %>
+          <td><%= link_to "#{@wed[0].article} #{@wed[0].price}円", edit_post_path(@wed[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @thu[0] %>
+          <td><%= link_to "#{@thu[0].article} #{@thu[0].price}円", edit_post_path(@thu[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @fri[0] %>
+          <td><%= link_to "#{@fri[0].article} #{@fri[0].price}円", edit_post_path(@fri[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @sat[0] %>
+          <td><%= link_to "#{@sat[0].article} #{@sat[0].price}円", edit_post_path(@sat[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @sun[0] %>
+          <td><%= link_to "#{@sun[0].article} #{@sun[0].price}円", edit_post_path(@sun[0]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @mon[1] %>
+          <td><%= link_to "#{@mon[1].article} #{@mon[1].price}円", edit_post_path(@mon[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @tue[1] %>
+          <td><%= link_to "#{@tue[1].article} #{@tue[1].price}円", edit_post_path(@tue[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @wed[1] %>
+          <td><%= link_to "#{@wed[1].article} #{@wed[1].price}円", edit_post_path(@wed[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @thu[1] %>
+          <td><%= link_to "#{@thu[1].article} #{@thu[1].price}円", edit_post_path(@thu[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @fri[1] %>
+          <td><%= link_to "#{@fri[1].article} #{@fri[1].price}円", edit_post_path(@fri[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @sat[1] %>
+          <td><%= link_to "#{@sat[1].article} #{@sat[1].price}円", edit_post_path(@sat[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if @sun[1] %>
+          <td><%= link_to "#{@sun[1].article} #{@sun[1].price}円", edit_post_path(@sun[1]) %><i class="fas fa-pen"></i></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="vertical-row black-cell">小計</th>
+        <td class="left-justify">500円</td>
+        <td class="left-justify"></td>
+        <td class="left-justify"></td>
+        <td class="left-justify"></td>
+        <td class="left-justify"></td>
+        <td class="left-justify"></td>
+        <td class="left-justify"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<script>
+$('td > a').hover(function(){
+  $(this).next("i").show();
+}, function(){
+  $(this).next("i").hide();
+});
+
+$('.second-btn').click(function(){
+  $('.overlay').fadeIn();
+  $('.new-entry').fadeIn();
+});
+
+
+$('.close-btn').click(function(){
+  $('.overlay').fadeOut();
+  $('.new-entry').fadeOut();
+});
+
+$('.overlay').click(function(){
+  $('.overlay').fadeOut();
+  $('.new-entry').fadeOut();
+});
+
+function d() {
+  var today = new Date();
+  today.setDate(today.getDate());
+  var yyyy = today.getFullYear();
+  var mm = ("0"+(today.getMonth()+1)).slice(-2);
+  var dd = ("0"+today.getDate()).slice(-2);
+  document.getElementById("today").innerHTML=yyyy+'年 '+mm+'月'+dd+'日';
+  $("#post-date").val(yyyy+'/'+mm+'/'+dd);
+}
+d();
+
+$(".cal1").gDatePicker({
+  //表示形式
+  date_format : 'Y年 m月d日',
+  //カレンダー開くとき
+  onOpen:function(dp){
+    return $("#today",dp.parent()).html();
+  },
+  //カレンダー選択後
+  onSelect:function(v,year,month,day,dp){
+    $("#today",dp.parent()).html(v);
+    $("#post-date").val(year+'/'+month+'/'+day);
+  }
+});
+
+$(".cal2").gDatePicker({
+  //表示形式
+  date_format : 'Ymd',
+  //カレンダー選択後
+  onSelect:function(v,year,month,day,dp){
+    $("#today",dp.parent()).html(v);
+  }
+});
+
+
+
+
+$('.tab li').click(function(){
+  const index = $('.tab li').index(this);
+  $('.tab li').removeClass('entry-active');
+  $(this).addClass('entry-active');
+  if(index == 0){
+    $('.tab-1').addClass('hide');
+    $('.tab-0').removeClass('hide');
+  } else {
+    $('.tab-0').addClass('hide');
+    $('.tab-1').removeClass('hide');
+  }
+});
+
+$("ul.menu li").hover(function(){
+    $(">ul:not(:animated)",this).slideDown("fast");
+  },function(){
+    $(">ul",this).slideUp("fast");
+});
+</script>

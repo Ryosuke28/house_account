@@ -1,0 +1,283 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+/* header */
+.flash {
+  font-size: 20px;
+  background-color:#CC6633;
+  color: white;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid silver;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.header-top {
+  height: 60px;
+  display: flex;
+  justify-content:space-between;
+  color: rgb(100, 100, 100);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-logo img {
+  height: 60px;
+  margin-right: 15px;
+}
+
+.header-logo h1 {
+  font-size: 32px;
+}
+
+.header-login a {
+  line-height: 60px;
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+}
+
+.header-tab {
+  display: flex;
+  font-size: 20px;
+}
+
+.header-tab {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.header-tab li {
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+.header-tab a {
+  color: #333333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header-tab a:hover {
+  color: navy;
+}
+
+.active {
+  border-bottom: 5px solid navy;
+}
+
+.active a {
+  color: navy;
+}
+/* header終わり*/
+
+
+/* ログインページ */
+.login-wrapper {
+  background-color: #eee;
+  height: 1000px;
+  padding-top: 100px;
+}
+  
+.login-form {
+  background-color: white;
+  width: 550px;
+  margin: 0 auto;
+  padding: 30px 50px 40px;;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+  
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-form .field {
+  margin-bottom: 20px;
+}
+
+.login-form form label {
+  
+}
+
+.login-form input#user_remember_me {
+  width: 30px;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+  
+.login-form form .field input {
+  width: 100%;
+  height: 40px;
+  padding: 15px;
+}
+
+.login-form form .actions input {
+  background-color: blue;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+.login-form form .actions input:hover {
+  background-color: #0099FF;
+  transition: .5s;
+}
+
+.login-help {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+}
+/* ログインページ 終わり */
+
+/* top-quick-entry*/
+.quick-entry {
+  width: 500px;
+  margin: 10px;
+}
+
+.section-title {
+  font-size: 30px;
+  border-bottom: 5px solid silver;
+  margin-bottom: 15px;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.quick-entry form {
+  background-color: #eeeeee;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.field {
+  width: 450px;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.field label {
+  width: 120px;
+  float: left;
+}
+
+.field input {
+  height: 30px;
+  font-size: 20px;
+  border: 1px solid gray;
+}
+
+.field input:focus {
+  border: 1px solid blue;
+}
+
+.field select {
+  height: 30px;
+  font-size: 20px;
+}
+
+.actions input {
+  height: 40px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  background-color: navy;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.actions input:hover {
+  background-color: blue;
+  cursor: pointer;
+  transition: .5s;
+}
+/* top-quick-entry　終わり*/
+</style>
+
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
+        <h1>household acount</h1>
+      </div>
+      <div class="header-login">
+        <a href="/login_form">ログイン</a>
+        <a href="/logout">ログアウト</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="login-wrapper">
+  <div class="login-form">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "リセットメールを送信" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

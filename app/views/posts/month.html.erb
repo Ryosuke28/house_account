@@ -1,0 +1,449 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+/* header */
+.flash {
+  font-size: 20px;
+  background-color:#CC6633;
+  color: white;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.header {
+  border-bottom: 1px solid silver;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.header-top {
+  height: 60px;
+  display: flex;
+  justify-content:space-between;
+  color: rgb(100, 100, 100);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-logo img {
+  height: 60px;
+  margin-right: 15px;
+}
+
+.header-logo h1 {
+  font-size: 32px;
+}
+
+.header-login a {
+  line-height: 60px;
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+}
+
+.header-tab {
+  display: flex;
+  font-size: 20px;
+}
+
+.header-tab {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.header-tab li {
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+.header-tab a {
+  color: #333333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header-tab a:hover {
+  color: navy;
+}
+
+.active {
+  border-bottom: 5px solid navy;
+}
+
+.active a {
+  color: navy;
+}
+/* header終わり*/
+
+
+/* 月詳細*/
+.month_title {
+  padding-left: 50px;
+  padding-top: 10px;
+}
+
+#cv2 {
+  margin: 0px 0;
+}
+
+.month-data, .total-data {
+  width: 1140px;
+  display: flex;
+  margin-bottom: 100px;
+}
+
+.cost-table {
+  border: 3px solid black;
+}
+
+.income-table {
+  margin-right: 80px;
+  border: 4px solid black;
+}
+
+.month-data span {
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 110px;
+}
+
+.cost-table tr {
+  height: 40px;
+}
+
+.cost-table th {
+  width: 120px;
+}
+
+.cost-table td {
+  width: 120px;
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.heading-row {
+  font-size: 20px;
+  background-color: #ddd;
+}
+
+.total-data table {
+  width: 200px;
+  margin-top: 22px;
+  border: 4px solid black;
+  vertical-align: bottom;
+}
+
+.total-data tr {
+  height: 50px;
+}
+
+.total-data td {
+  font-size: 20px;
+}
+
+.total-data span {
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 40px;
+  margin: 0 20px 0 450px;
+}
+
+.total-table {
+  margin-left: 130px;
+}
+
+.total-table div{
+  border: 5px solid black;
+  height: 75px;
+  width: 280px;
+  background-color:#99FF99;
+}
+
+.total-table h2 {
+  font-size: 35px;
+  text-align: right;
+  padding-top: 10px;
+  padding-right: 5px;
+}
+/* 月詳細 終わり */
+</style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-logo">
+        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
+        <h1>household acount</h1>
+      </div>
+      <div class="header-login">
+        <%= link_to 'ログイン', new_user_session_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
+      </div>
+    </div>
+
+    <ul class="header-tab">
+      <li><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
+      <li class="active"><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
+      <li><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+<div class="container">
+<h1 class="month_title"><%= "#{params[:year]}年#{params[:month]}月" %></h1>
+  <canvas class="" id="cv2" height="500" width="1140"></canvas>
+  <div class="month-data">
+    <table class="cost-table income-table" border="1">
+      <tr>
+        <th class="heading-row" colspan="2">総収入</th>
+      </tr>
+      <tr>
+        <th>給料</th>
+        <td><%= @kyuuryou %>円</td>
+      </tr>
+      <tr>
+        <% if @sonota_2s[0] %>
+          <th><%= @sonota_2s[0].article %></th>
+          <td><%= @sonota_2s[0].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @sonota_2s[1] %>
+          <th><%= @sonota_2s[1].article %></th>
+          <td><%= @sonota_2s[1].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @sonota_2s[2] %>
+          <th><%= @sonota_2s[2].article %></th>
+          <td><%= @sonota_2s[2].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>合計</th>
+        <td><%= @kyuuryou+@sonota_2 %>円</td>
+      </tr>
+    </table>
+    <table class="cost-table" border="1">
+      <tr>
+        <th class="heading-row" colspan="2">生活費</th>
+      </tr>
+      <tr>
+        <th>食費</th>
+        <td><%= @syokuhi %>円</td>
+      </tr>
+      <tr>
+        <th>日用品</th>
+        <td><%= @nitiyouhin %>円</td>
+      </tr>
+      <tr>
+        <th>衣服・美容費</th>
+        <td><%= @ihuku %>円</td>
+      </tr>
+      <tr>
+        <th>娯楽費</th>
+        <td><%= @goraku %>円</td>
+      </tr>
+      <tr>
+        <th>交通費</th>
+        <td><%= @koutuu %>円</td>
+      </tr>
+      <tr>
+        <th>教養費</th>
+        <td><%= @kyouyou %>円</td>
+      </tr>
+      <tr>
+        <th>医療費</th>
+        <td><%= @iryou %>円</td>
+      </tr>
+      <tr>
+        <th>交際費</th>
+        <td><%= @kousai %>円</td>
+      </tr>
+      <tr>
+        <th>その他</th>
+        <td><%= @sonota_1 %>円</td>
+      </tr>
+      <tr>
+        <th>合計</th>
+        <td><%= @seikatu_sum %>円</td>
+      </tr>
+    </table>
+    <span>＋</span>
+    <table class="cost-table" border="1">
+      <tr>
+        <th class="heading-row" colspan="2">特別支出</th>
+      </tr>
+      <tr>
+        <% if @tokubetus[0] %>
+          <th><%= @tokubetus[0].article %></th>
+          <td><%= @tokubetus[0].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @tokubetus[1] %>
+          <th><%= @tokubetus[1].article %></th>
+          <td><%= @tokubetus[1].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @tokubetus[2] %>
+          <th><%= @tokubetus[2].article %></th>
+          <td><%= @tokubetus[2].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if @tokubetus[3] %>
+          <th><%= @tokubetus[3].article %></th>
+          <td><%= @tokubetus[3].price %>円</td>
+        <% else %>
+          <th></th>
+          <td></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>合計</th>
+        <td><%= @tokubetu_sum %>円</td>
+      </tr>
+    </table>
+    <span>＋</span>
+    <table class="cost-table" border="1">
+      <tr>
+        <th class="heading-row" colspan="2">固定費</th>
+      </tr>
+      <tr>
+        <th>住居費</th>
+        <td><%= @juukyo %>円</td>
+      </tr>
+      <tr>
+        <th>電気代</th>
+        <td><%= @denki %>円</td>
+      </tr>
+      <tr>
+        <th>ガス代</th>
+        <td><%= @gasu %>円</td>
+      </tr>
+      <tr>
+        <th>水道代</th>
+        <td><%= @suidou %>円</td>
+      </tr>
+      <tr>
+        <th>通信・電話代</th>
+        <td><%= @tuusin %>円</td>
+      </tr>
+      <tr>
+        <th>携帯電話代</th>
+        <td><%= @keitai %>円</td>
+      </tr>
+      <tr>
+        <th>合計</th>
+        <td><%= @kotei_sum %>円</td>
+      </tr>
+    </table>
+  </div>
+  <div class="total-data">
+    <span>=</span>
+    <table class="cost-table" border="1">
+      <tr>
+        <th class="heading-row">総支出</th>
+      </tr>
+      <tr>
+        <td><%= @sousisyutu %>円</td>
+      </tr>
+      
+    </table>
+    <div class="total-table">
+      <h1><%= params[:month] %>月の収支は</h1>
+      <div><h2><%= @kyuuryou + @sonota_2 - @sousisyutu %>円</h2></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var ctx = document.getElementById("cv2").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["食費", "日用品", "衣服・美容費", "娯楽費", "交通費", "教養費", "医療費", "交際費", "その他", "特別支出", "住居費", "電気代", "ガス代", "水道代", "通信・電話代", "携帯電話代"],
+      datasets: [{
+        backgroundColor: ["blue", "lime", "yellow", "pink", "aqua", "fuchsia", "olive", "navy", "silver", "red", "green", "maroon", "fuchsia", "blue", "purple", "teal"],
+        data: [<%= @syokuhi %>, <%= @nitiyouhin %>, <%= @ihuku %>, <%= @goraku %>, <%= @koutuu %>, <%= @kyouyou %>, <%= @iryou %>, <%= @kousai %>, <%= @sonota_1 %>,
+               <%= @tokubetu_sum %>, <%= @juukyo %>, <%= @denki %>, <%= @gasu %>, <%= @suidou %>, <%= @tuusin %>, <%= @keitai %>]
+      }]
+    },
+    options: {
+      responsive: false,
+      cutoutPercentage: 40,
+      legend: {
+        position: 'bottom',
+        labels: {
+          fontSize: 16,
+          boxWidth: 55
+        }
+      }
+    }
+  });
+
+</script>

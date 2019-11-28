@@ -164,6 +164,10 @@ table {
   font-size: 20px;
 }
 
+.actions {
+  display: flex;
+}
+
 .actions input {
   height: 40px;
   width: 150px;
@@ -176,8 +180,27 @@ table {
   margin: 20px auto 0;
 }
 
+.actions a {
+  height: 40px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  background-color: maroon;
+  border: none;
+  border-radius: 5px;
+  margin: 20px auto 0;
+  text-align: center;
+  padding-top: 7px;
+}
+
 .actions input:hover {
   background-color: blue;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.actions a:hover {
+  background-color: red;
   cursor: pointer;
   transition: .5s;
 }
@@ -488,17 +511,17 @@ cursor: pointer;
 					</li>
 					<li><a>特別支出 <i class="fas fa-caret-right"></i></a>
 					<ul class="sub">
-						<li><a onclick="$('#menuA').html('特別支出');$('#menuB').html('特別支出');$('#category1').val('2');$('#category2').val('1');">特別支出</a></li>
+						<li><a onclick="$('#menuA').html('特別支出');$('#menuB').html('特別支出');$('#category1').val('2');$('#category2').val('10');">特別支出</a></li>
 					</ul>
 					</li>
 					<li><a>固定費 <i class="fas fa-caret-right"></i></a>
 					<ul class="sub">
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('住居費');$('#category1').val('3');$('#category2').val('1');">住居費</a></li>
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('電気代');$('#category1').val('3');$('#category2').val('2');">電気代</a></li>
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('ガス代');$('#category1').val('3');$('#category2').val('3');">ガス代</a></li>
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('水道代');$('#category1').val('3');$('#category2').val('4');">水道代</a></li>
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('通信・電話代');$('#category1').val('3');$('#category2').val('5');">通信・電話代</a></li>
-						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('携帯電話代');$('#category1').val('3');$('#category2').val('6');">携帯電話代</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('住居費');$('#category1').val('3');$('#category2').val('11');">住居費</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('電気代');$('#category1').val('3');$('#category2').val('12');">電気代</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('ガス代');$('#category1').val('3');$('#category2').val('13');">ガス代</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('水道代');$('#category1').val('3');$('#category2').val('14');">水道代</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('通信・電話代');$('#category1').val('3');$('#category2').val('15');">通信・電話代</a></li>
+						<li><a onclick="$('#menuA').html('固定費');$('#menuB').html('携帯電話代');$('#category1').val('3');$('#category2').val('16');">携帯電話代</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -512,8 +535,8 @@ cursor: pointer;
 			<ul class="menu">
 				<li><a id="menuC">未選択 <i class="fas fa-caret-down"></i></a>
 					<ul class="sub">
-						<li><a onclick="$('#menuC').html('給料');$('#category1').val('4');$('#category2').val('1');">給料</a></li>
-						<li><a onclick="$('#menuC').html('その他');$('#category1').val('4');$('#category2').val('2');">その他</a></li>
+						<li><a onclick="$('#menuC').html('給料');$('#category1').val('4');$('#category2').val('17');">給料</a></li>
+						<li><a onclick="$('#menuC').html('その他');$('#category1').val('4');$('#category2').val('18');">その他</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -525,7 +548,7 @@ cursor: pointer;
 			<%= f.text_field :article %>
 		</div>
 		<div class="actions">
-			<%= f.submit '登録する' %>
+			<%= f.submit '修正する' %>
       <%= link_to '削除する', post_path(@post), method: :delete, class: "btn " %>
 		</div>
 	<% end %>

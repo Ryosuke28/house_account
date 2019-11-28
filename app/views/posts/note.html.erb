@@ -578,7 +578,7 @@ td i.fa-pen {
       </tr>
       <tr>
         <th class="vertical-row" rowspan="12">項目</th>
-        <% if @mon[0] %>
+        <% if @mon[0] # @monにデータが0個だと、@mon[0].view,@mon[0].priceがビューエラーとなるため、ifでデータが存在するかを確認してから存在すればリンク、存在しなければ空のセルを作成する。 %>
           <td><%= link_to "#{@mon[0].article} #{@mon[0].price}円", edit_post_path(@mon[0]) %><i class="fas fa-pen"></i></td>
         <% else %>
           <td></td>

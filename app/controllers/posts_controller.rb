@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
 
   def index
+    # クイック入力用に@postを作成
     @post = Post.new
+    # 「今月の収支」用
     d = Date.today
     @syunyu = current_user.posts.where(date: d.in_time_zone.all_month).where(category1: 4).sum(:price)
     @shisyutu = current_user.posts.where(date: d.in_time_zone.all_month).where(category1: [1..3]).sum(:price)
@@ -13,18 +17,30 @@ class PostsController < ApplicationController
     post = current_user.posts.new(post_params)
     
     if post.save
-      redirect_to posts_url, notice: "保存しました"
+      redirect_to posts_url, notice: "投稿を保存しました。"
     end
   end
 
   def edit
-    @post = current_user.posts.find(params[:id])
+  end
+
+  def update
+    @post.update!(post_params)
+    redirect_to posts_url, notice: "投稿を更新しました。"
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to "/posts/note", notice: "投稿を削除しました"
   end
 
   def month
-    d = Date.today
+    # 表示する月を指定（現在はとりあえず2019/11を指定)
+    d = Date.new(2019,11,1)
+    # 指定月の投稿内容を取得
     @posts = current_user.posts.where(date: d.in_time_zone.all_month)
 
+    # 投稿内容を項目ごとに仕分けし、合計金額を計算
     @kyuuryou = @posts.where(category1: 4).where(category2: 1).sum(:price).to_i
     @sonota_2 = @posts.where(category1: 4).where(category2: 2).sum(:price).to_i
     @sonota_2s = @posts.where(category1: 4).where(category2: 2)
@@ -59,9 +75,22 @@ class PostsController < ApplicationController
 
 
   def year
+    # 現在の日付を取得。これを基準に過去6ヶ月の内容を取得する。
     @baseday = Date.today
+    # @posts = []
+
+    # index = 5
+    # 6.times do
+    #   post = current_user.posts.where(date: @baseday.prev_month(index).in_time_zone.all_month)
+    #   post.total_view(@posts)
+    # end
 
 
+
+
+
+
+    # 今月の内容を取得し、項目ごとに合計金額を計算
     @posts6 = current_user.posts.where(date: @baseday.in_time_zone.all_month)
 
     @syokuhi6 = @posts6.where(category1: 1).where(category2: 1).sum(:price).to_i
@@ -90,8 +119,7 @@ class PostsController < ApplicationController
 
 
 
-
-
+    # 1ヶ月前の月の内容を取得し、項目ごとに合計金額を計算
     @posts5 = Post.where(user_id: session[:user_id]).where(date: @baseday.prev_month(1).in_time_zone.all_month)
 
     @syokuhi5 = @posts5.where(category1: 1).where(category2: 1).sum(:price).to_i
@@ -121,7 +149,7 @@ class PostsController < ApplicationController
 
 
 
-
+    # ２ヶ月前の月の内容を取得し、項目ごとに合計金額を計算
     @posts4 = Post.where(user_id: session[:user_id]).where(date: @baseday.prev_month(2).in_time_zone.all_month)
 
     @syokuhi4 = @posts4.where(category1: 1).where(category2: 1).sum(:price).to_i
@@ -237,10 +265,13 @@ class PostsController < ApplicationController
   end
 
   def note
+    # 入力モーダル用に@postを作成
     @post = Post.new
 
 
-    d = Date.today
+    # 表示する月を指定（現在はとりあえず2019/11/26を指定)
+    d = Date.new(2019,11,26)
+    # 指定の日付の含まれた週の日付を曜日ごとに取得
     if d.sunday?
       @monday = d - 6
     else
@@ -253,6 +284,7 @@ class PostsController < ApplicationController
     @saturday = (@monday + 5)
     @sunday = (@monday + 6)
 
+    # 各日の日付で登録されている投稿内容をすべて取得。この内容をビューで@mon[0],@mon[1]と順番に使用する。
     @mon = current_user.posts.where(date: @monday)
     @tue = current_user.posts.where(date: @tuesday)
     @wed = current_user.posts.where(date: @wednesday)
@@ -280,5 +312,9 @@ class PostsController < ApplicationController
   private
     def post_params
       params.require(:post).permit(:date, :price, :category1, :category2, :article)
+    end
+
+    def set_post
+      @post = current_user.posts.find(params[:id])
     end
 end

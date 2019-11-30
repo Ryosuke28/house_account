@@ -9,7 +9,7 @@ class Post < ApplicationRecord
 			# return "#{self.icon}#{self.article} #{self.price}円 <a href="edit_post_path(self)"><i class="fas fa-pen"></i></a>"
 			return "#{self.try(:article)} #{self.try(:price)}円" 
 		else
-			return "none"
+			return ""
 		end
 	end
 
@@ -19,7 +19,7 @@ class Post < ApplicationRecord
 			# return link_to "#{self.article} #{self.price}円", edit_post_path(self)
 			return "a"
 		else
-			return "none"
+			return ""
 		end
 	end
 

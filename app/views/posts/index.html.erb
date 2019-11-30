@@ -1,334 +1,3 @@
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-}
-
-a {
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-
-/* header */
-.flash {
-  font-size: 20px;
-  background-color:#CC6633;
-  color: white;
-  height: 30px;
-  width: 100%;
-  text-align: center;
-}
-
-.header {
-  border-bottom: 1px solid silver;
-}
-
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-}
-
-.header-top {
-  height: 60px;
-  display: flex;
-  justify-content:space-between;
-  color: rgb(100, 100, 100);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.header-logo {
-  display: flex;
-  align-items: flex-end;
-}
-
-.header-logo img {
-  height: 60px;
-  margin-right: 15px;
-}
-
-.header-logo h1 {
-  font-size: 32px;
-}
-
-.header-login a {
-  line-height: 60px;
-  font-size: 20px;
-  color: rgb(100, 100, 100);
-}
-
-.header-tab {
-  display: flex;
-  font-size: 20px;
-}
-
-.header-tab {
-  width: 1000px;
-  margin: 0 auto;
-}
-
-.header-tab li {
-  height: 50px;
-  width: 150px;
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-  position: relative;
-}
-
-.header-tab a {
-  color: #333333;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.header-tab a:hover {
-  color: navy;
-}
-
-.active {
-  border-bottom: 5px solid navy;
-}
-
-.active a {
-  color: navy;
-}
-/* header終わり*/
-
-
-/* ホーム */
-/* top-result */
-.top-wrapper {
-  display: flex;
-  justify-content: space-around;
-}
-
-.result {
-  width: 500px;
-  margin: 10px;
-}
-
-.result table {
-  width: 400px;
-  margin: 0 auto;
-  font-size: 20px;
-}
-
-.result tr {
-  height: 50px;
-}
-
-.result th {
-  background-color: #ddffff;
-}
-
-.result td {
-  background-color: white;
-  text-align: right;
-  padding-right: 20px;
-  font-weight: bold;
-}
-/* top-result終わり*/
-
-/* top-quick-entry*/
-.quick-entry {
-  width: 500px;
-  margin: 10px;
-}
-
-.section-title {
-  font-size: 30px;
-  border-bottom: 5px solid silver;
-  margin-bottom: 15px;
-}
-
-.blue {
-  color: blue;
-}
-
-.red {
-  color: red;
-}
-
-.quick-entry form {
-  background-color: #eeeeee;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.field {
-  width: 450px;
-  font-size: 22px;
-  margin-bottom: 5px;
-}
-
-.quick-entry label {
-  width: 120px;
-  float: left;
-}
-
-.field input {
-  height: 30px;
-  font-size: 20px;
-  border: 1px solid gray;
-}
-
-.field input:focus {
-  border: 1px solid blue;
-}
-
-.field select {
-  height: 30px;
-  font-size: 20px;
-}
-
-.actions input {
-  height: 40px;
-  width: 150px;
-  color: white;
-  font-size: 20px;
-  background-color: navy;
-  border: none;
-  border-radius: 5px;
-  display: block;
-  margin: 20px auto 0;
-}
-
-.actions input:hover {
-  background-color: blue;
-  cursor: pointer;
-  transition: .5s;
-}
-
-/* quick-entry内 項目部分 */
-ul.menu {
-  cursor: pointer;
-}
-
-ul.menu:after {
-  height: 0;
-  visibility: hidden;
-  content: ".";
-  display: block;
-  clear: both;
-}
-
-ul.menu li {
-  float: left;
-  width: 154px;
-  height: 30px;
-  background-color: white;
-  position: relative;
-}
-
-ul.menu > li {
-  margin-right: 10px;
-  border: 1px solid #999;
-}
-
-ul.menu li > ul {
-  position: relative;
-  top: 1px;
-  left: -1px;
-  border: 1px solid #999;
-}
-
-ul.menu li a {
-  display: block;
-  width: 100%;
-  height: 99%;
-  line-height: 30px;
-  font-size: 20px;
-  text-indent: 5px;
-  color: #111;
-  text-decoration: none;
-  position: relative;
-}
-
-ul.menu i {
-  float: right;
-  padding-right: 10px;
-  padding-top: 5px;
-  color: silver;
-}
-
-ul.sub li a:hover {
-  background-color: #005FFF;
-  color: white;
-}
-
-ul.sub li {
-  float: none;
-  width: 100%;
-  border-box: 1px solid #999;
-}
-
-ul.sub li ul.sub {
-  position: absolute;
-  left: 152px;
-  top: 0;
-  z-index: 10;
-}
-
-ul.sub {
-  display: none;
-  width: 154px;
-  z-index: 10;
-}
-
-ul.sub-2 li {
-  width: 151px;
-}
-/* quick-entry内 項目部分 終わり */
-/* top-quick-entry　終わり*/
-
-/* カレンダー */
-.calendar{
-  width:70%;
-  margin:0 auto;
-  margin-top: 30px;
-}
-
-td {
-  background-color: #fff;
-}
-
-.addok{
-  background-color: #00ff00 !important;
-}
-
-.addwrn{
-  background-color: #ff00ff !important;
-}
-
-.addng{
-  background-color:#ff0000 !important;
-}
-/* カレンダー終わり */
-/* ホーム 終わり*/
-</style>
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!--  datepicker用js -->
-<script src="http://school.oohara.jp/rtakagi/datepicker.js"></script>
-<link rel="stylesheet" href="http://school.oohara.jp/rtakagi/datepicker.css" />
 <!--  カレンダー用js -->
 <script src='https://school.oohara.jp/rtakagi/js/moment.min.js'></script>
 <script src="https://school.oohara.jp/rtakagi/js/fullcalendar.min.js"></script>
@@ -336,40 +5,9 @@ td {
 <link rel="stylesheet" href="https://school.oohara.jp/rtakagi/js/fullcalendar.min.css" type="text/css"/>
 
 
-
-
 <span id="star"></span>
 
-<div class="header">
-  <div class="container">
-    <div class="header-top">
-      <div class="header-logo">
-        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
-        <h1>household acount</h1>
-      </div>
-      <div class="header-login">
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
-      </div>
-    </div>
-
-    <ul class="header-tab">
-      <li class="active"><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
-      <li><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
-      <li><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
-    </ul>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+<%= render 'header' %>
 
 <div class="container">
   <div class="top-wrapper">
@@ -400,11 +38,6 @@ td {
 					<%= f.hidden_field :date, id: "post-date" %>
         </div>
 
-        <div class="field">
-					<%= f.label :price, '支出金額' %>
-					<%= f.text_field :price %><span> 円</span>
-        </div>
-        
         <div class="field">
 					<%= f.label :category1, '項目' %>
 					<%= f.hidden_field :category1, id: "category1" %>
@@ -443,10 +76,15 @@ td {
                 </ul>
               </li>
 
-              <li><a id="menuB">未選択 <i class="fas fa-caret-down"></i></a></li>
+              <li><a id="menuB">未選択</a></li>
             </ul>
         </div>
         <div style="clear:both"></div>
+
+        <div class="field">
+					<%= f.label :price, '支出金額' %>
+					<%= f.text_field :price %><span> 円</span>
+        </div>
         
         <div class="field">
 					<%= f.label :article, 'メモ' %>
@@ -469,6 +107,10 @@ td {
 
 
 <script>
+$('.header-tab li').removeClass("active");
+$('.header-tab li').eq(0).addClass("active");
+
+
 //クイック入力の日付部分
 function d() {
     var today = new Date();

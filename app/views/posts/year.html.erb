@@ -1,186 +1,10 @@
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-}
-
-a {
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-
-/* header */
-.flash {
-  font-size: 20px;
-  background-color:#CC6633;
-  color: white;
-  height: 30px;
-  width: 100%;
-  text-align: center;
-}
-
-.header {
-  border-bottom: 1px solid silver;
-}
-
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-}
-
-.header-top {
-  height: 60px;
-  display: flex;
-  justify-content:space-between;
-  color: rgb(100, 100, 100);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.header-logo {
-  display: flex;
-  align-items: flex-end;
-}
-
-.header-logo img {
-  height: 60px;
-  margin-right: 15px;
-}
-
-.header-logo h1 {
-  font-size: 32px;
-}
-
-.header-login a {
-  line-height: 60px;
-  font-size: 20px;
-  color: rgb(100, 100, 100);
-}
-
-.header-tab {
-  display: flex;
-  font-size: 20px;
-}
-
-.header-tab {
-  width: 1000px;
-  margin: 0 auto;
-}
-
-.header-tab li {
-  height: 50px;
-  width: 150px;
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-  position: relative;
-}
-
-.header-tab a {
-  color: #333333;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.header-tab a:hover {
-  color: navy;
-}
-
-.active {
-  border-bottom: 5px solid navy;
-}
-
-.active a {
-  color: navy;
-}
-/* header終わり*/
-
-/* 月別一覧 */
-#cv1 {
-  margin-top: 20px;
-}
-
-.blue {
-  color: blue;
-}
-
-.red {
-  color: red;
-}
-
-.months-wrapper {
-  width: 1140px;
-  margin: 0 auto;
-  padding-right: 10px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
-}
-
-.month-index {
-  width: 40px;
-}
-  
-.month {
-  position: relative;
-  width: 16%;
-  text-align: center;
-}
-/* 月別一覧 終わり */
-</style>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="http://school.oohara.jp/rtakagi/datepicker.js"></script>
-<link rel="stylesheet" href="http://school.oohara.jp/rtakagi/datepicker.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 
-<div class="header">
-  <div class="container">
-    <div class="header-top">
-      <div class="header-logo">
-        <img src="https://school.oohara.jp/rtakagi/diamond.png" alt="">
-        <h1>household acount</h1>
-      </div>
-      <div class="header-login">
-        <%= link_to 'ログイン', new_user_session_path %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
-      </div>
-    </div>
-
-    <ul class="header-tab">
-      <li><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
-      <li class="active"><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
-      <li><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
-    </ul>
-  </div>
-</div>
-
+<%= render 'header' %>
 
 <div class="container">
-  
-  
+
   <canvas id="cv1" height="560" width="1140"></canvas>
-  
-  
-  
-  
-  
   
   <div class="months-wrapper">
     <div class="month-index">
@@ -228,6 +52,9 @@ table {
 </div>
 
 <script>
+$('.header-tab li').removeClass("active");
+$('.header-tab li').eq(1).addClass("active");
+
 var ctx = document.getElementById('cv1').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',

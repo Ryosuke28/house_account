@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
-
   def index
     # クイック入力用に@postを作成
     @post = Post.new
@@ -17,7 +16,9 @@ class PostsController < ApplicationController
     post = current_user.posts.new(post_params)
     
     if post.save
-      redirect_to posts_url, notice: "投稿を保存しました。"
+      redirect_to "/posts/note", notice: "投稿を保存しました。"
+    else
+      redirect_to "/posts/note"
     end
   end
 
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
 
   def update
     @post.update!(post_params)
-    redirect_to posts_url, notice: "投稿を更新しました。"
+    redirect_to "/posts/note", notice: "投稿を更新しました。"
   end
 
   def destroy
@@ -35,10 +36,10 @@ class PostsController < ApplicationController
   end
 
   def month
-    # 表示する月を指定（現在はとりあえず2019/11を指定)
-    d = Date.new(2019,11,1)
+    # 表示する月を指定
+    @d = Date.parse(params[:date])
     # 指定月の投稿内容を取得
-    @posts = current_user.posts.where(date: d.in_time_zone.all_month)
+    @posts = current_user.posts.where(date: @d.in_time_zone.all_month)
 
     # 投稿内容を項目ごとに仕分けし、合計金額を計算
     @kyuuryou = @posts.where(category1: 4).where(category2: 1).sum(:price).to_i
@@ -270,7 +271,14 @@ class PostsController < ApplicationController
 
 
     # 表示する月を指定（現在はとりあえず2019/11/26を指定)
-    d = Date.new(2019,11,26)
+    # d = Date.new(2019,11,26)
+
+    if params[:date]
+      d = Date.parse(params[:date])
+    else
+      d = Date.today
+    end
+
     # 指定の日付の含まれた週の日付を曜日ごとに取得
     if d.sunday?
       @monday = d - 6
@@ -317,4 +325,6 @@ class PostsController < ApplicationController
     def set_post
       @post = current_user.posts.find(params[:id])
     end
+
+    
 end

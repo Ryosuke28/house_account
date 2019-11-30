@@ -392,7 +392,8 @@ li.salary {
 
 .calender td {
   width: 155px;
-  font-size: 16px;
+  font-size: 14px;
+  padding-left: 7px;
 }
 
 .vertical-row {
@@ -421,11 +422,7 @@ li.salary {
   padding-right: 7px;
 }
 
-td i.fa-pen {
-  padding-left: 7px;
-  color: blue;
-  display: none;
-}
+
 /* 家計簿のCSS 終わり */
 </style>
 
@@ -553,10 +550,14 @@ td i.fa-pen {
 
 <div class="container">
   <div class="event-btn">
-    <a class="btn" href="#"><i class="fas fa-angle-double-left"></i> 前の週へ</a>
+    <%= link_to "/posts/note?date=#{@monday - 1}", class: "btn" do %>
+      <i class="fas fa-angle-double-left"></i> 前の週へ
+    <% end %>
     <a class="btn second-btn"><i class="far fa-edit"></i> 入力</a>
     <span class="btn serch-btn" href="#"><span class="cal2"><i class="fas fa-search"></i> 週を移動</span></span>
-    <a class="btn"href="#">次の週へ <i class="fas fa-angle-double-right"></i></a>
+    <%= link_to "/posts/note?date=#{@sunday + 1}", class: "btn" do %>
+      次の週へ <i class="fas fa-angle-double-right"></i>
+    <% end %>
   </div>
 
   
@@ -578,179 +579,123 @@ td i.fa-pen {
       </tr>
       <tr>
         <th class="vertical-row" rowspan="12">項目</th>
-        <% if @mon[0] # @monにデータが0個だと、@mon[0].view,@mon[0].priceがビューエラーとなるため、ifでデータが存在するかを確認してから存在すればリンク、存在しなければ空のセルを作成する。 %>
-          <td><%= link_to "#{@mon[0].article} #{@mon[0].price}円", edit_post_path(@mon[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @tue[0] %>
-          <td><%= link_to "#{@tue[0].article} #{@tue[0].price}円", edit_post_path(@tue[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @wed[0] %>
-          <td><%= link_to "#{@wed[0].article} #{@wed[0].price}円", edit_post_path(@wed[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @thu[0] %>
-          <td><%= link_to "#{@thu[0].article} #{@thu[0].price}円", edit_post_path(@thu[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @fri[0] %>
-          <td><%= link_to "#{@fri[0].article} #{@fri[0].price}円", edit_post_path(@fri[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @sat[0] %>
-          <td><%= link_to "#{@sat[0].article} #{@sat[0].price}円", edit_post_path(@sat[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @sun[0] %>
-          <td><%= link_to "#{@sun[0].article} #{@sun[0].price}円", edit_post_path(@sun[0]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <%= render 'link', post: @mon[0] %>
+        <%= render 'link', post: @tue[0] %>
+        <%= render 'link', post: @wed[0] %>
+        <%= render 'link', post: @thu[0] %>
+        <%= render 'link', post: @fri[0] %>
+        <%= render 'link', post: @sat[0] %>
+        <%= render 'link', post: @sun[0] %>
       </tr>
       <tr>
-        <% if @mon[1] %>
-          <td><%= link_to "#{@mon[1].article} #{@mon[1].price}円", edit_post_path(@mon[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @tue[1] %>
-          <td><%= link_to "#{@tue[1].article} #{@tue[1].price}円", edit_post_path(@tue[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @wed[1] %>
-          <td><%= link_to "#{@wed[1].article} #{@wed[1].price}円", edit_post_path(@wed[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @thu[1] %>
-          <td><%= link_to "#{@thu[1].article} #{@thu[1].price}円", edit_post_path(@thu[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @fri[1] %>
-          <td><%= link_to "#{@fri[1].article} #{@fri[1].price}円", edit_post_path(@fri[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @sat[1] %>
-          <td><%= link_to "#{@sat[1].article} #{@sat[1].price}円", edit_post_path(@sat[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if @sun[1] %>
-          <td><%= link_to "#{@sun[1].article} #{@sun[1].price}円", edit_post_path(@sun[1]) %><i class="fas fa-pen"></i></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <%= render 'link', post: @mon[1] %>
+        <%= render 'link', post: @tue[1] %>
+        <%= render 'link', post: @wed[1] %>
+        <%= render 'link', post: @thu[1] %>
+        <%= render 'link', post: @fri[1] %>
+        <%= render 'link', post: @sat[1] %>
+        <%= render 'link', post: @sun[1] %>
       </tr>
       
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[2] %>
+        <%= render 'link', post: @tue[2] %>
+        <%= render 'link', post: @wed[2] %>
+        <%= render 'link', post: @thu[2] %>
+        <%= render 'link', post: @fri[2] %>
+        <%= render 'link', post: @sat[2] %>
+        <%= render 'link', post: @sun[2] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[3] %>
+        <%= render 'link', post: @tue[3] %>
+        <%= render 'link', post: @wed[3] %>
+        <%= render 'link', post: @thu[3] %>
+        <%= render 'link', post: @fri[3] %>
+        <%= render 'link', post: @sat[3] %>
+        <%= render 'link', post: @sun[3] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[4] %>
+        <%= render 'link', post: @tue[4] %>
+        <%= render 'link', post: @wed[4] %>
+        <%= render 'link', post: @thu[4] %>
+        <%= render 'link', post: @fri[4] %>
+        <%= render 'link', post: @sat[4] %>
+        <%= render 'link', post: @sun[4] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[5] %>
+        <%= render 'link', post: @tue[5] %>
+        <%= render 'link', post: @wed[5] %>
+        <%= render 'link', post: @thu[5] %>
+        <%= render 'link', post: @fri[5] %>
+        <%= render 'link', post: @sat[5] %>
+        <%= render 'link', post: @sun[5] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[6] %>
+        <%= render 'link', post: @tue[6] %>
+        <%= render 'link', post: @wed[6] %>
+        <%= render 'link', post: @thu[6] %>
+        <%= render 'link', post: @fri[6] %>
+        <%= render 'link', post: @sat[6] %>
+        <%= render 'link', post: @sun[6] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[7] %>
+        <%= render 'link', post: @tue[7] %>
+        <%= render 'link', post: @wed[7] %>
+        <%= render 'link', post: @thu[7] %>
+        <%= render 'link', post: @fri[7] %>
+        <%= render 'link', post: @sat[7] %>
+        <%= render 'link', post: @sun[7] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[8] %>
+        <%= render 'link', post: @tue[8] %>
+        <%= render 'link', post: @wed[8] %>
+        <%= render 'link', post: @thu[8] %>
+        <%= render 'link', post: @fri[8] %>
+        <%= render 'link', post: @sat[8] %>
+        <%= render 'link', post: @sun[8] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[9] %>
+        <%= render 'link', post: @tue[9] %>
+        <%= render 'link', post: @wed[9] %>
+        <%= render 'link', post: @thu[9] %>
+        <%= render 'link', post: @fri[9] %>
+        <%= render 'link', post: @sat[9] %>
+        <%= render 'link', post: @sun[9] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[10] %>
+        <%= render 'link', post: @tue[10] %>
+        <%= render 'link', post: @wed[10] %>
+        <%= render 'link', post: @thu[10] %>
+        <%= render 'link', post: @fri[10] %>
+        <%= render 'link', post: @sat[10] %>
+        <%= render 'link', post: @sun[10] %>
       </tr>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <%= render 'link', post: @mon[11] %>
+        <%= render 'link', post: @tue[11] %>
+        <%= render 'link', post: @wed[11] %>
+        <%= render 'link', post: @thu[11] %>
+        <%= render 'link', post: @fri[11] %>
+        <%= render 'link', post: @sat[11] %>
+        <%= render 'link', post: @sun[11] %>
       </tr>
       <tr>
         <th class="vertical-row black-cell">小計</th>
-        <td class="left-justify">500円</td>
-        <td class="left-justify"></td>
-        <td class="left-justify"></td>
-        <td class="left-justify"></td>
-        <td class="left-justify"></td>
-        <td class="left-justify"></td>
-        <td class="left-justify"></td>
+        <td class="left-justify"><%= @mon.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @tue.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @wed.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @thu.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @fri.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @sat.sum(:price).to_i %>円</td>
+        <td class="left-justify"><%= @sun.sum(:price).to_i %>円</td>
       </tr>
     </table>
   </div>
@@ -758,12 +703,6 @@ td i.fa-pen {
 
 
 <script>
-$('td > a').hover(function(){
-  $(this).next("i").show();
-}, function(){
-  $(this).next("i").hide();
-});
-
 $('.second-btn').click(function(){
   $('.overlay').fadeIn();
   $('.new-entry').fadeIn();

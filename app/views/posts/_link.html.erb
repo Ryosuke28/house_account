@@ -1,0 +1,45 @@
+<td>
+	<% if post # @monにデータが0個だと、@mon[0].view,@mon[0].priceがビューエラーとなるため、ifでデータが存在するかを確認してから存在すればリンク、存在しなければ空のセルを作成する。  %>
+		<% icon = post.category2 %>
+		<% if icon == "1" %>
+			<i class="fas fa-utensils"></i>
+		<% elsif icon == "2" %>
+			<i class="fas fa-toilet-paper"></i>
+		<% elsif icon == "3" %>
+			<i class="fas fa-tshirt"></i>
+		<% elsif icon == "4" %>
+			<i class="fas fa-futbol"></i>
+		<% elsif icon == "5" %>
+			<i class="fas fa-car-side"></i>
+		<% elsif icon == "6" %>
+			<i class="fas fa-graduation-cap"></i>
+		<% elsif icon == "7" %>
+			<i class="fas fa-hospital-alt"></i>
+		<% elsif icon == "8" %>
+			<i class="fas fa-users"></i>
+		<% elsif icon == "9" %>
+			<i class="far fa-sticky-note"></i>
+		<% elsif icon == "10" %>
+			<i class="fas fa-exclamation-circle"></i>
+		<% elsif icon == "11" %>
+			<i class="fas fa-exclamation-circle"></i>
+		<% elsif icon == "12" %>
+			<i class="fas fa-plug"></i>
+		<% elsif icon == "13" %>
+			<i class="fas fa-fire"></i>
+		<% elsif icon == "14" %>
+			<i class="fas fa-shower"></i>
+		<% elsif icon == "15" %>
+			<i class="fas fa-wifi"></i>
+		<% elsif icon == "16" %>
+			<i class="fas fa-mobile-alt"></i>
+		<% elsif icon == "17" %>
+			<i class="fas fa-coins"></i>
+		<% elsif icon == "18" %>
+			<i class="fas fa-wallet"></i>
+		<% end %>
+		
+		<%= link_to "#{post.article.truncate(6)} #{post.price}円", edit_post_path(post) %>
+	<% end %>
+	
+</td>

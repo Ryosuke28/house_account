@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
-  get 'posts/month', to: 'posts#month'
-  get 'posts/year', to: 'posts#year'
-  get 'posts/note', to: 'posts#note'
+  get 'posts/month'
+  get 'posts/year'
+  get 'posts/note'
   devise_for :users
   resources :posts
   

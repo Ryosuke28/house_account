@@ -116,6 +116,14 @@ table {
   margin-top: 20px;
 }
 
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
 .months-wrapper {
   width: 1140px;
   margin: 0 auto;
@@ -184,37 +192,37 @@ table {
       <h3 class="blue"><%= @sousyunyu1 %>円</h3>
       <h3 class="red"><%= @sousisyutu1 %>円</h3>
       <h3><%= @sousyunyu1 - @sousisyutu1 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(5).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(5).year}&month=#{@baseday.prev_month(5).month}" %>
+      <%= link_to "#{@baseday.prev_month(5).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(5)}" %>
     </div>
     <div class="month">
       <h3 class="blue"><%= @sousyunyu2 %>円</h3>
       <h3 class="red"><%= @sousisyutu2 %>円</h3>
       <h3><%= @sousyunyu2 - @sousisyutu2 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(4).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(4).year}&month=#{@baseday.prev_month(4).month}" %>
+      <%= link_to "#{@baseday.prev_month(4).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(4)}" %>
     </div>
     <div class="month">
       <h3 class="blue"><%= @sousyunyu3 %>円</h3>
       <h3 class="red"><%= @sousisyutu3 %>円</h3>
       <h3><%= @sousyunyu3 - @sousisyutu3 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(3).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(3).year}&month=#{@baseday.prev_month(3).month}" %>
+      <%= link_to "#{@baseday.prev_month(3).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(3)}" %>
     </div>
     <div class="month">
       <h3 class="blue"><%= @sousyunyu4 %>円</h3>
       <h3 class="red"><%= @sousisyutu4 %>円</h3>
       <h3><%= @sousyunyu4 - @sousisyutu4 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(2).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(2).year}&month=#{@baseday.prev_month(2).month}" %>
+      <%= link_to "#{@baseday.prev_month(2).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(2)}" %>
     </div>
     <div class="month">
       <h3 class="blue"><%= @sousyunyu5 %>円</h3>
       <h3 class="red"><%= @sousisyutu5 %>円</h3>
       <h3><%= @sousyunyu5 - @sousisyutu5 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(1).month}月詳細へ", "/posts/month?year=#{@baseday.prev_month(1).year}&month=#{@baseday.prev_month(1).month}" %>
+      <%= link_to "#{@baseday.prev_month(1).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(1)}" %>
     </div>
     <div class="month">
       <h3 class="blue"><%= @sousyunyu6 %>円</h3>
       <h3 class="red"><%= @sousisyutu6 %>円</h3>
       <h3><%= @sousyunyu6 - @sousisyutu6 %>円</h3>
-      <%= link_to "#{@baseday.month}月詳細へ", "/posts/month?year=#{@baseday.year}&month=#{@baseday.month}" %>
+      <%= link_to "#{@baseday.month}月詳細へ", "/posts/month?date=#{@baseday}" %>
     </div>
   </div>
 </div>

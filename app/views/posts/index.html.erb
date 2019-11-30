@@ -348,10 +348,6 @@ td {
         <h1>household acount</h1>
       </div>
       <div class="header-login">
-        <% if session[:user_id] %>
-          <a>ログインユーザー：<%= session[:user_id] %></a>
-        <% end %>
-        <%= link_to 'ログイン', new_user_session_path %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
       </div>
     </div>

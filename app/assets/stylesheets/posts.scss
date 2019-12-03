@@ -304,29 +304,44 @@ ul.sub-2 li {
 /* quick-entry内 項目部分 終わり */
 /* top-quick-entry　終わり*/
 
-/* カレンダー */
-.calendar {
-	width:70%;
-	margin:0 auto;
-	margin-top: 30px;
+/* gem カレンダー */
+.simple-calendar {	
+	width: 70%;
+	margin: 0 auto;
+	table {
+		background-color: white;
+	}
+	span {
+		font-size: 25px;
+		font-weight: bold;
+	}
+	th {
+		text-align: center;
+	}
+	.day {
+		height: 70px;
+		width: 100px;
+	}
+
+	.wday-6 {
+		background-color: #CCFFFF;
+	}
+	.wday-0 {
+		background-color: #FFDDFF;
+	}
+
+	.prev-month div {
+		display: none;
+	}
+	.next-month div {
+		display: none;
+	}
+
 }
 
-td {
-	background-color: #fff;
-}
-  
-.addok{
-	background-color: #00ff00 !important;
-}
 
-.addwrn{
-	background-color: #ff00ff !important;
-}
+/* gem カレンダー終わり */
 
-.addng{
-	background-color:#ff0000 !important;
-}
-/* カレンダー終わり */
 /* index 終わり*/
 
 /* year */

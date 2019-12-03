@@ -5,7 +5,7 @@
 	<div class="edit-entry">
 	<h1>内容修正</h1>
 	<ul class="tab">
-    <% if @post.category1 == 4 %>
+    <% if @post.category1 == "4" %>
       <li class="pay"><i class="fas fa-shopping-bag"></i> 支出</li>
       <li class="salary entry-active"><i class="fas fa-coins"></i> 収入</li>
     <% else %>
@@ -100,6 +100,7 @@
   $('.header-tab li').removeClass("active");
   $('.header-tab li').eq(2).addClass("active");
 
+
 	function d() {
     var data = $('#post-date').val();
     var today = new Date(data);
@@ -180,9 +181,13 @@
         break;
       case "17":
         $('#menuC').html('給料');
+        $('.tab-0').addClass('hide');
+        $('.tab-1').removeClass('hide');
         break;
       case "18":
         $('#menuC').html('その他');
+        $('.tab-0').addClass('hide');
+        $('.tab-1').removeClass('hide');
         break;
     }
   }

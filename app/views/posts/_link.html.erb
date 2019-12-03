@@ -38,8 +38,12 @@
 		<% elsif icon == "18" %>
 			<i class="fas fa-wallet"></i>
 		<% end %>
-		
-		<%= link_to "#{post.article.truncate(6)} #{post.price}円", edit_post_path(post) %>
+		<% if post.category1 == "4"
+				 cp = "+"
+			 else
+			 	 cp = "-"
+			 end %>
+		<%= link_to "#{post.article.truncate(6)} #{cp}#{post.price}円", edit_post_path(post) %>
 	<% end %>
 	
 </td>

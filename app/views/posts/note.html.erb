@@ -13,7 +13,7 @@
   <%= form_with model: @post, local: true do |f| %>
     <div class="field">
 			<%= f.label :date, '日付' %>
-			<span class="today" id="today"></span> <img class="cal1" src="http://school.oohara.jp/yoshikawa/cal.png" width=20px><br>
+			<span class="today" id="today"></span> <img class="cal1" src="/assets/cal.png" width=20px><br>
 			<%= f.hidden_field :date, id: "post-date" %>
 		</div>
 
@@ -111,7 +111,7 @@
   <div class="calender">
     <table border="1" width="1140">
       <tr>
-        <th class="vertical-row black-cell">9月</th>
+        <th class="vertical-row black-cell"><%= @monday.month %>月</th>
         <th class="weekday-cell"><%= @monday.day %>日(月)</th>
         <th class="weekday-cell"><%= @tuesday.day %>日(火)</th>
         <th class="weekday-cell"><%= @wednesday.day %>日(水)</th>
@@ -122,123 +122,22 @@
       </tr>
       <tr>
         <th class="vertical-row" rowspan="12">項目</th>
-        <%= render 'link', post: @mon[0] %>
-        <%= render 'link', post: @tue[0] %>
-        <%= render 'link', post: @wed[0] %>
-        <%= render 'link', post: @thu[0] %>
-        <%= render 'link', post: @fri[0] %>
-        <%= render 'link', post: @sat[0] %>
-        <%= render 'link', post: @sun[0] %>
+        <% [@mon, @tue, @wed, @thu, @fri, @sat, @sun].each do |date| %>
+          <%= render 'link', post: date[0] %>
+        <% end %>
       </tr>
-      <tr>
-        <%= render 'link', post: @mon[1] %>
-        <%= render 'link', post: @tue[1] %>
-        <%= render 'link', post: @wed[1] %>
-        <%= render 'link', post: @thu[1] %>
-        <%= render 'link', post: @fri[1] %>
-        <%= render 'link', post: @sat[1] %>
-        <%= render 'link', post: @sun[1] %>
-      </tr>
-      
-      <tr>
-        <%= render 'link', post: @mon[2] %>
-        <%= render 'link', post: @tue[2] %>
-        <%= render 'link', post: @wed[2] %>
-        <%= render 'link', post: @thu[2] %>
-        <%= render 'link', post: @fri[2] %>
-        <%= render 'link', post: @sat[2] %>
-        <%= render 'link', post: @sun[2] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[3] %>
-        <%= render 'link', post: @tue[3] %>
-        <%= render 'link', post: @wed[3] %>
-        <%= render 'link', post: @thu[3] %>
-        <%= render 'link', post: @fri[3] %>
-        <%= render 'link', post: @sat[3] %>
-        <%= render 'link', post: @sun[3] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[4] %>
-        <%= render 'link', post: @tue[4] %>
-        <%= render 'link', post: @wed[4] %>
-        <%= render 'link', post: @thu[4] %>
-        <%= render 'link', post: @fri[4] %>
-        <%= render 'link', post: @sat[4] %>
-        <%= render 'link', post: @sun[4] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[5] %>
-        <%= render 'link', post: @tue[5] %>
-        <%= render 'link', post: @wed[5] %>
-        <%= render 'link', post: @thu[5] %>
-        <%= render 'link', post: @fri[5] %>
-        <%= render 'link', post: @sat[5] %>
-        <%= render 'link', post: @sun[5] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[6] %>
-        <%= render 'link', post: @tue[6] %>
-        <%= render 'link', post: @wed[6] %>
-        <%= render 'link', post: @thu[6] %>
-        <%= render 'link', post: @fri[6] %>
-        <%= render 'link', post: @sat[6] %>
-        <%= render 'link', post: @sun[6] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[7] %>
-        <%= render 'link', post: @tue[7] %>
-        <%= render 'link', post: @wed[7] %>
-        <%= render 'link', post: @thu[7] %>
-        <%= render 'link', post: @fri[7] %>
-        <%= render 'link', post: @sat[7] %>
-        <%= render 'link', post: @sun[7] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[8] %>
-        <%= render 'link', post: @tue[8] %>
-        <%= render 'link', post: @wed[8] %>
-        <%= render 'link', post: @thu[8] %>
-        <%= render 'link', post: @fri[8] %>
-        <%= render 'link', post: @sat[8] %>
-        <%= render 'link', post: @sun[8] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[9] %>
-        <%= render 'link', post: @tue[9] %>
-        <%= render 'link', post: @wed[9] %>
-        <%= render 'link', post: @thu[9] %>
-        <%= render 'link', post: @fri[9] %>
-        <%= render 'link', post: @sat[9] %>
-        <%= render 'link', post: @sun[9] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[10] %>
-        <%= render 'link', post: @tue[10] %>
-        <%= render 'link', post: @wed[10] %>
-        <%= render 'link', post: @thu[10] %>
-        <%= render 'link', post: @fri[10] %>
-        <%= render 'link', post: @sat[10] %>
-        <%= render 'link', post: @sun[10] %>
-      </tr>
-      <tr>
-        <%= render 'link', post: @mon[11] %>
-        <%= render 'link', post: @tue[11] %>
-        <%= render 'link', post: @wed[11] %>
-        <%= render 'link', post: @thu[11] %>
-        <%= render 'link', post: @fri[11] %>
-        <%= render 'link', post: @sat[11] %>
-        <%= render 'link', post: @sun[11] %>
-      </tr>
+      <% 11.times do |index| %>
+        <tr>
+          <% [@mon, @tue, @wed, @thu, @fri, @sat, @sun].each do |date| %>
+            <%= render 'link', post: date[index + 1] %>
+          <% end %>
+        </tr>
+      <% end %>
       <tr>
         <th class="vertical-row black-cell">小計</th>
-        <td class="left-justify"><%= @mon.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @tue.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @wed.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @thu.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @fri.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @sat.sum(:price).to_i %>円</td>
-        <td class="left-justify"><%= @sun.sum(:price).to_i %>円</td>
+        <% [@mon, @tue, @wed, @thu, @fri, @sat, @sun].each do |date| %>
+          <%= render 'total', posts: date %>
+        <% end %>
       </tr>
     </table>
   </div>

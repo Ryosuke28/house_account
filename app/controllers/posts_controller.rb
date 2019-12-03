@@ -10,6 +10,7 @@ class PostsController < ApplicationController
     @syunyu = current_user.posts.where(date: d.in_time_zone.all_month).where(category1: 4).sum(:price)
     @shisyutu = current_user.posts.where(date: d.in_time_zone.all_month).where(category1: [1..3]).sum(:price)
     @syushi = @syunyu - @shisyutu
+    @posts = current_user.posts.where(date: d.in_time_zone.all_month)
   end
 
   def create

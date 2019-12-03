@@ -65,3 +65,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+# デバッグ
+gem 'pry-rails'
+gem 'pry-byebug'
+
+# カレンダーgem
+gem 'simple_calendar', '~>2.0'

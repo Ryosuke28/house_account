@@ -34,7 +34,7 @@
       <%= form_with model: @post, local: true do |f| %>
         <div class="field">
 					<%= f.label :date, '日付' %>
-					<span class="today" id="today"></span> <img class="cal1" src="http://school.oohara.jp/yoshikawa/cal.png" width=20px><br>
+					<span class="today" id="today"></span> <img class="cal1" src="/assets/cal.png" width=20px><br>
 					<%= f.hidden_field :date, id: "post-date" %>
         </div>
 
@@ -97,11 +97,22 @@
       
     </div>
   </div>
-  
 
-  <div class="calendar">
-     <div id="cal"></div>
-  </div>
+  <%= month_calendar events: @posts do |date, posts| %>
+    <%= date.day %><br>
+    <% total = 0 %>
+    <div style="text-align: center; padding-top: 10px;">
+      <% posts.each do |post| 
+          if post.category1 == "4"
+            total += post.price
+          else
+            total -= post.price
+          end
+        end %>
+
+      <%= total %>円
+    </div>
+  <% end %>
   
 </div>
 
@@ -143,43 +154,6 @@ $("ul.menu li").hover(function(){
     $(">ul:not(:animated)",this).slideDown("fast");
   },function(){
     $(">ul",this).slideUp("fast");
-});
-
-
-//カレンダー
-$(document).ready(function(){
-  $('#cal').fullCalendar({
-    header: {
-    },
-    height:500,
-    locale: 'ja', // the initial locale
-    eventLimit: true, // allow "more" link when too many events
-    editable: true,
-    eventRender: function (event, element) {
-      var dataToFind = moment(event.start).format('YYYY-MM-DD');
-      if(event.title.substr(0,1)=="●"){
-        $("td[data-date='"+dataToFind+"']").addClass('addok');
-      }
-      if(event.title.substr(0,1)=="△"){
-        $("td[data-date='"+dataToFind+"']").addClass('addwrn');
-      }
-      if(event.title.substr(0,1)=="×"){
-        $("td[data-date='"+dataToFind+"']").addClass('addng');
-      }
-    },
-    events:[
-      {
-        title :"● 予約可能",
-        start:"2019-10-15",
-      },{
-        title :"△ 予約可能",
-        start:"2019-10-16"
-      },{
-        title :"× 予約不可",
-        start:"2019-10-18"
-      }
-    ]
-  });
 });
 
 

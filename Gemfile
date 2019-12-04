@@ -72,3 +72,5 @@ gem 'pry-byebug'
 
 # カレンダーgem
 gem 'simple_calendar', '~>2.0'
+# jquery
+gem 'jquery-rails'

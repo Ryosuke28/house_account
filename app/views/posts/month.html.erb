@@ -1,5 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-
 <%= render 'header' %>
 
 <div class="container">
@@ -8,15 +6,15 @@
   <div class="month-data">
     <table class="cost-table income-table" border="1">
       <tr>
-        <th class="heading-row" colspan="2">総収入</th>
+        <th class="heading-row text-center" colspan="2">総収入</th>
       </tr>
       <tr>
-        <th>給料</th>
+        <th class="text-center">給料</th>
         <td><%= @kyuuryou %>円</td>
       </tr>
       <tr>
         <% if @sonota_2s[0] %>
-          <th><%= @sonota_2s[0].article %></th>
+          <th class="text-center"><%= @sonota_2s[0].article %></th>
           <td><%= @sonota_2s[0].price %>円</td>
         <% else %>
           <th></th>
@@ -25,7 +23,7 @@
       </tr>
       <tr>
         <% if @sonota_2s[1] %>
-          <th><%= @sonota_2s[1].article %></th>
+          <th class="text-center"><%= @sonota_2s[1].article %></th>
           <td><%= @sonota_2s[1].price %>円</td>
         <% else %>
           <th></th>
@@ -34,7 +32,7 @@
       </tr>
       <tr>
         <% if @sonota_2s[2] %>
-          <th><%= @sonota_2s[2].article %></th>
+          <th class="text-center"><%= @sonota_2s[2].article %></th>
           <td><%= @sonota_2s[2].price %>円</td>
         <% else %>
           <th></th>
@@ -42,63 +40,63 @@
         <% end %>
       </tr>
       <tr>
-        <th>合計</th>
+        <th class="text-center">合計</th>
         <td><%= @kyuuryou+@sonota_2 %>円</td>
       </tr>
     </table>
     <table class="cost-table" border="1">
       <tr>
-        <th class="heading-row" colspan="2">生活費</th>
+        <th class="heading-row text-center" colspan="2">生活費</th>
       </tr>
       <tr>
-        <th>食費</th>
+        <th class="text-center">食費</th>
         <td><%= @syokuhi %>円</td>
       </tr>
       <tr>
-        <th>日用品</th>
+        <th class="text-center">日用品</th>
         <td><%= @nitiyouhin %>円</td>
       </tr>
       <tr>
-        <th>衣服・美容費</th>
+        <th class="text-center">衣服・美容費</th>
         <td><%= @ihuku %>円</td>
       </tr>
       <tr>
-        <th>娯楽費</th>
+        <th class="text-center">娯楽費</th>
         <td><%= @goraku %>円</td>
       </tr>
       <tr>
-        <th>交通費</th>
+        <th class="text-center">交通費</th>
         <td><%= @koutuu %>円</td>
       </tr>
       <tr>
-        <th>教養費</th>
+        <th class="text-center">教養費</th>
         <td><%= @kyouyou %>円</td>
       </tr>
       <tr>
-        <th>医療費</th>
+        <th class="text-center">医療費</th>
         <td><%= @iryou %>円</td>
       </tr>
       <tr>
-        <th>交際費</th>
+        <th class="text-center">交際費</th>
         <td><%= @kousai %>円</td>
       </tr>
       <tr>
-        <th>その他</th>
+        <th class="text-center">その他</th>
         <td><%= @sonota_1 %>円</td>
       </tr>
       <tr>
-        <th>合計</th>
+        <th class="text-center">合計</th>
         <td><%= @seikatu_sum %>円</td>
       </tr>
     </table>
     <span>＋</span>
     <table class="cost-table" border="1">
       <tr>
-        <th class="heading-row" colspan="2">特別支出</th>
+        <th class="heading-row text-center" colspan="2">特別支出</th>
       </tr>
       <tr>
         <% if @tokubetus[0] %>
-          <th><%= @tokubetus[0].article %></th>
+          <th class="text-center"><%= @tokubetus[0].article %></th>
           <td><%= @tokubetus[0].price %>円</td>
         <% else %>
           <th></th>
@@ -107,7 +105,7 @@
       </tr>
       <tr>
         <% if @tokubetus[1] %>
-          <th><%= @tokubetus[1].article %></th>
+          <th class="text-center"><%= @tokubetus[1].article %></th>
           <td><%= @tokubetus[1].price %>円</td>
         <% else %>
           <th></th>
@@ -116,7 +114,7 @@
       </tr>
       <tr>
         <% if @tokubetus[2] %>
-          <th><%= @tokubetus[2].article %></th>
+          <th class="text-center"><%= @tokubetus[2].article %></th>
           <td><%= @tokubetus[2].price %>円</td>
         <% else %>
           <th></th>
@@ -125,7 +123,7 @@
       </tr>
       <tr>
         <% if @tokubetus[3] %>
-          <th><%= @tokubetus[3].article %></th>
+          <th class="text-center"><%= @tokubetus[3].article %></th>
           <td><%= @tokubetus[3].price %>円</td>
         <% else %>
           <th></th>
@@ -133,41 +131,41 @@
         <% end %>
       </tr>
       <tr>
-        <th>合計</th>
+        <th class="text-center">合計</th>
         <td><%= @tokubetu_sum %>円</td>
       </tr>
     </table>
     <span>＋</span>
     <table class="cost-table" border="1">
       <tr>
-        <th class="heading-row" colspan="2">固定費</th>
+        <th class="heading-row text-center" colspan="2">固定費</th>
       </tr>
       <tr>
-        <th>住居費</th>
+        <th class="text-center">住居費</th>
         <td><%= @juukyo %>円</td>
       </tr>
       <tr>
-        <th>電気代</th>
+        <th class="text-center">電気代</th>
         <td><%= @denki %>円</td>
       </tr>
       <tr>
-        <th>ガス代</th>
+        <th class="text-center">ガス代</th>
         <td><%= @gasu %>円</td>
       </tr>
       <tr>
-        <th>水道代</th>
+        <th class="text-center">水道代</th>
         <td><%= @suidou %>円</td>
       </tr>
       <tr>
-        <th>通信・電話代</th>
+        <th class="text-center">通信・電話代</th>
         <td><%= @tuusin %>円</td>
       </tr>
       <tr>
-        <th>携帯電話代</th>
+        <th class="text-center">携帯電話代</th>
         <td><%= @keitai %>円</td>
       </tr>
       <tr>
-        <th>合計</th>
+        <th class="text-center">合計</th>
         <td><%= @kotei_sum %>円</td>
       </tr>
     </table>
@@ -176,7 +174,7 @@
     <span>=</span>
     <table class="cost-table" border="1">
       <tr>
-        <th class="heading-row">総支出</th>
+        <th class="heading-row text-center">総支出</th>
       </tr>
       <tr>
         <td><%= @sousisyutu %>円</td>
@@ -184,7 +182,7 @@
       
     </table>
     <div class="total-table">
-      <h1><%= params[:month] %>月の収支は</h1>
+      <h1><%= @d.month %>月の収支は</h1>
       <div><h2><%= @kyuuryou + @sonota_2 - @sousisyutu %>円</h2></div>
     </div>
   </div>

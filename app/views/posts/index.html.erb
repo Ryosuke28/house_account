@@ -1,8 +1,8 @@
 <!--  カレンダー用js -->
-<script src='https://school.oohara.jp/rtakagi/js/moment.min.js'></script>
-<script src="https://school.oohara.jp/rtakagi/js/fullcalendar.min.js"></script>
-<script src="https://school.oohara.jp/rtakagi/js/locale-all.js"></script>
-<link rel="stylesheet" href="https://school.oohara.jp/rtakagi/js/fullcalendar.min.css" type="text/css"/>
+<script src='https://dl.dropbox.com/s/np26ita7m2xs5fl/moment.min.js?dl=0'></script>
+<script src="https://dl.dropbox.com/s/r0bh7gfqg94s150/fullcalendar.min.js?dl=0"></script>
+<script src="https://dl.dropbox.com/s/o1rk0q0koqaru62/locale-all.js?dl=0"></script>
+<link rel="stylesheet" href="https://dl.dropbox.com/s/vjpvseaycz3qc0z/fullcalendar.min.css?dl=0" type="text/css"/>
 
 
 <span id="star"></span>
@@ -15,15 +15,15 @@
       <h1 class="section-title">今月の収支</h1>
       <table border="1">
         <tr>
-          <th>収入</th>
+          <th class="text-center">収入</th>
           <td class="blue"><%= @syunyu %>円</td>
         </tr>
         <tr>
-          <th>支出 </th>
+          <th class="text-center">支出 </th>
           <td class="red"><%= @shisyutu %>円</td>
         </tr>
         <tr>
-          <th>収支</th>
+          <th class="text-center">収支</th>
           <td><%= @syushi %>円</td>
         </tr>
       </table>
@@ -37,6 +37,7 @@
 					<span class="today" id="today"></span> <img class="cal1" src="https://dl.dropbox.com/s/4sc35kr0xgjuzq7/cal.png?dl=0" width=20px><br>
 					<%= f.hidden_field :date, id: "post-date" %>
         </div>
+        <div style="clear:both"></div>
 
         <div class="field">
 					<%= f.label :category1, '項目' %>
@@ -85,11 +86,13 @@
 					<%= f.label :price, '支出金額' %>
 					<%= f.text_field :price %><span> 円</span>
         </div>
+        <div style="clear:both"></div>
         
         <div class="field">
 					<%= f.label :article, 'メモ' %>
 					<%= f.text_field :article %>
         </div>
+        <div style="clear:both"></div>
         <div class="actions">
 					<%= f.submit '登録する' %>
         </div>
@@ -100,30 +103,74 @@
 
   <%= month_calendar events: @posts do |date, posts| %>
     <%= date.day %><br>
-    <% total = 0 %>
-    <div style="text-align: center; padding-top: 10px;">
-      <% posts.each do |post| 
-          if post.category1 == "4"
-            total += post.price
-          else
-            total -= post.price
-          end
-        end %>
-
+    <% total = 0
+       text = ""
+       posts.each do |post| 
+        unless post.category1 == "4"
+          total -= post.price
+          text += "#{post.article} #{post.price}円"
+          text += "<br>"
+        end
+      end %>
+    <div class="day-total" data-toggle="tooltip" data-html="true" title="<%= text %>">
       <%= total %>円
     </div>
   <% end %>
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">今月の収入を登録しませんか？</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with model: @post, local: true do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.hidden_field :date, id: "kyuryo-date" %>
+            <%= f.hidden_field :category1, value: "4" %>
+            <%= f.hidden_field :category2, value: "17" %>
+            <%= f.hidden_field :article, value: "給料" %>
+            <%= f.label :price, '今月の収入' %>
+            <div class="row">
+              <div class="col-11"><%= f.text_field :price, class: "form-control text-right" %></div>
+              <div class="col-1 d-flex align-items-center pl-0 h5">円</div>
+            </div>
+          </div>
+          <%= f.submit '登録する', class: "btn btn-primary float-right ml-3" %>
+          <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">閉じる</button>
+          <div class="clearfix"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
   
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script>
-$('.header-tab li').removeClass("active");
-$('.header-tab li').eq(0).addClass("active");
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
+  $('.header-tab li').removeClass("active");
+  $('.header-tab li').eq(0).addClass("active");
 
 
-//クイック入力の日付部分
-function d() {
+  //クイック入力の日付部分
+  function d() {
     var today = new Date();
     today.setDate(today.getDate());
     var yyyy = today.getFullYear();
@@ -131,73 +178,74 @@ function d() {
     var dd = ("0"+today.getDate()).slice(-2);
     document.getElementById("today").innerHTML=yyyy+'年 '+mm+'月'+dd+'日';
     $("#post-date").val(yyyy+'/'+mm+'/'+dd);
-}
-d();
-
-$(".cal1").gDatePicker({
-  //表示形式
-  date_format : 'Y年 m月d日',
-  //カレンダー開くとき
-  onOpen:function(dp){
-    return $("#today",dp.parent()).html();
-  },
-  //カレンダー選択後
-  onSelect:function(v,year,month,day,dp){
-    $("#today",dp.parent()).html(v);
-    $("#post-date").val(year+'/'+month+'/'+day);
+    $("#kyuryo-date").val(yyyy+'/'+mm+'/'+dd);
   }
-});
+  d();
 
-
-//クイック入力の項目部分
-$("ul.menu li").hover(function(){
-    $(">ul:not(:animated)",this).slideDown("fast");
-  },function(){
-    $(">ul",this).slideUp("fast");
-});
-
-
-//星を降らせる
-var hosix=Array(300);
-var hosiy=Array(300);
-hosix.fill(-1);
-hosiy.fill(-1);
-var hosicount=0;
-var screenx=window.innerWidth;
-var screeny=window.innerHeight;
-var timer2=setInterval("staranime()",2);
-
-var tmp="";
-for(var j=0;j<300;j++){
-  tmp+='<div id="s'+j+'"  style="position:fixed;z-index:-1;width:2px;height:2px;background-color:#000"></div>';
-}
-document.getElementById("star").innerHTML=tmp;
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-function staranime(){
-  screenx=window.innerWidth;
-  screeny=window.innerHeight;
-  if(hosicount!=300) hosicount++;
-  for(var i=0;i<hosicount;i++){
-    if(hosix[i]==-1){
-      if(getRandomInt(4)>=2){
-        hosix[i]=getRandomInt(screenx);
-        hosiy[i]=0;
-      }else{
-        hosix[i]=0;
-        hosiy[i]=getRandomInt(screeny);
-      }
+  $(".cal1").gDatePicker({
+    //表示形式
+    date_format : 'Y年 m月d日',
+    //カレンダー開くとき
+    onOpen:function(dp){
+      return $("#today",dp.parent()).html();
+    },
+    //カレンダー選択後
+    onSelect:function(v,year,month,day,dp){
+      $("#today",dp.parent()).html(v);
+      $("#post-date").val(year+'/'+month+'/'+day);
     }
-    hosix[i]++;
-    hosiy[i]++;
-    if(hosix[i]>=screenx) hosix[i]=-1;
-    if(hosiy[i]>=screeny) hosix[i]=-1;
-    $("#s"+i).css("top",hosiy[i]);
-    $("#s"+i).css("left",hosix[i]);
-   }
-}
+  });
+
+
+  //クイック入力の項目部分
+  $("ul.menu li").hover(function(){
+      $(">ul:not(:animated)",this).slideDown("fast");
+    },function(){
+      $(">ul",this).slideUp("fast");
+  });
+
+
+  //星を降らせる
+  var hosix=Array(300);
+  var hosiy=Array(300);
+  hosix.fill(-1);
+  hosiy.fill(-1);
+  var hosicount=0;
+  var screenx=window.innerWidth;
+  var screeny=window.innerHeight;
+  var timer2=setInterval("staranime()",2);
+
+  var tmp="";
+  for(var j=0;j<300;j++){
+    tmp+='<div id="s'+j+'"  style="position:fixed;z-index:-1;width:2px;height:2px;background-color:#000"></div>';
+  }
+  document.getElementById("star").innerHTML=tmp;
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  function staranime(){
+    screenx=window.innerWidth;
+    screeny=window.innerHeight;
+    if(hosicount!=300) hosicount++;
+    for(var i=0;i<hosicount;i++){
+      if(hosix[i]==-1){
+        if(getRandomInt(4)>=2){
+          hosix[i]=getRandomInt(screenx);
+          hosiy[i]=0;
+        }else{
+          hosix[i]=0;
+          hosiy[i]=getRandomInt(screeny);
+        }
+      }
+      hosix[i]++;
+      hosiy[i]++;
+      if(hosix[i]>=screenx) hosix[i]=-1;
+      if(hosiy[i]>=screeny) hosix[i]=-1;
+      $("#s"+i).css("top",hosiy[i]);
+      $("#s"+i).css("left",hosix[i]);
+    }
+  }
 
 
 

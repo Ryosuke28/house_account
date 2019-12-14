@@ -6,14 +6,14 @@
 				<h1>household acount</h1>
 			</div>
 			<div class="header-login">
-				<%= link_to 'ログアウト', destroy_user_session_path, method: :delete  %>
+				<%= link_to 'ログアウト', destroy_user_session_path, method: :delete ,class: "text-decoration-none" %>
 			</div>
 		</div>
 
     <ul class="header-tab">
-      <li><a href="/"><i class="fas fa-home"></i> ホーム</a></li>
-      <li><a href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
-      <li><a href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
+      <li><a class="text-decoration-none" href="/"><i class="fas fa-home"></i> ホーム</a></li>
+      <li><a class="text-decoration-none" href="/posts/year"><i class="far fa-calendar-alt"></i> 月別一覧</a></li>
+      <li><a class="text-decoration-none" href="/posts/note"><i class="fas fa-book-open"></i></i> 家計簿確認</a></li>
     </ul>
   </div>
 </div>

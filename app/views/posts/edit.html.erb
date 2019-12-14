@@ -21,6 +21,7 @@
 			<span class="today" id="today"></span> <img class="cal2" src="https://dl.dropbox.com/s/4sc35kr0xgjuzq7/cal.png?dl=0" width=20px><br>
 			<%= f.hidden_field :date, id: "post-date" %>
 		</div>
+    <div style="clear:both"></div>
 
 		<div class="field tab-0">
 			<%= f.label :category1, '項目' %>
@@ -81,14 +82,17 @@
 			<%= f.label :price, '収入金額', class: "tab-1 hide" %>
 			<%= f.text_field :price %><span> 円</span>
 		</div>
+    <div style="clear:both"></div>
 		
 		<div class="field">
 			<%= f.label :article, 'メモ' %>
 			<%= f.text_field :article %>
 		</div>
+    <div style="clear:both"></div>
+
 		<div class="actions">
 			<%= f.submit '修正する' %>
-      <%= link_to '削除する', post_path(@post), method: :delete, class: "btn " %>
+      <%= link_to '削除する', post_path(@post), method: :delete, class: "button text-decoration-none font-weight-normal" %>
 		</div>
 	<% end %>
 	

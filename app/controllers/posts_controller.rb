@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to "/posts/note?date=#{post[:date]}", notice: "投稿を削除しました"
+    redirect_to "/posts/note?date=#{@post[:date]}", notice: "投稿を削除しました"
   end
 
   def month

@@ -118,41 +118,45 @@
   <% end %>
 
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
+  <!--
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+  -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">今月の収入を登録しませんか？</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <%= form_with model: @post, local: true do |f| %>
-        <div class="modal-body">
-          <div class="form-group">
-            <%= f.hidden_field :date, id: "kyuryo-date" %>
-            <%= f.hidden_field :category1, value: "4" %>
-            <%= f.hidden_field :category2, value: "17" %>
-            <%= f.hidden_field :article, value: "給料" %>
-            <%= f.label :price, '今月の収入' %>
-            <div class="row">
-              <div class="col-11"><%= f.text_field :price, class: "form-control text-right" %></div>
-              <div class="col-1 d-flex align-items-center pl-0 h5">円</div>
-            </div>
-          </div>
-          <%= f.submit '登録する', class: "btn btn-primary float-right ml-3" %>
-          <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">閉じる</button>
-          <div class="clearfix"></div>
+  <!-- Modal -->
+  <!--
+  <div class="modal fade" id="exampleModal" data-sample="aaaaa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">今月の収入を登録しませんか？</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      <% end %>
+        <%= form_with model: @post, local: true do |f| %>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.hidden_field :date, id: "kyuryo-date" %>
+              <%= f.hidden_field :category1, value: "4" %>
+              <%= f.hidden_field :category2, value: "17" %>
+              <%= f.hidden_field :article, value: "給料" %>
+              <%= f.label :price, '今月の収入' %>
+              <div class="row">
+                <div class="col-11"><%= f.text_field :price, class: "form-control text-right" %></div>
+                <div class="col-1 d-flex align-items-center pl-0 h5">円</div>
+              </div>
+            </div>
+            <%= f.submit '登録する', class: "btn btn-primary float-right ml-3" %>
+            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">閉じる</button>
+            <div class="clearfix"></div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+  -->
 
   
 </div>

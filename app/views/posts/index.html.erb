@@ -28,6 +28,39 @@
         </tr>
       </table>
     </div>
+
+    <div class="overlay"></div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" data-sample="<%= session[:modal] %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">今月の収入を登録しませんか？</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="putsession">&times;</span>
+          </button>
+        </div>
+        <%= form_with model: @post, local: true do |f| %>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.hidden_field :date, id: "kyuryo-date" %>
+              <%= f.hidden_field :category1, value: "4" %>
+              <%= f.hidden_field :category2, value: "17" %>
+              <%= f.hidden_field :article, value: "給料" %>
+              <%= f.label :price, '今月の収入' %>
+              <div class="row">
+                <div class="col-11"><%= f.text_field :price, class: "form-control text-right" %></div>
+                <div class="col-1 d-flex align-items-center pl-0 h5">円</div>
+              </div>
+            </div>
+            <%= f.submit '登録する', class: "btn btn-primary float-right ml-3 putsession" %>
+            <button type="button" class="btn btn-secondary float-right putsession" data-dismiss="modal">閉じる</button>
+            <div class="clearfix"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
     
     <div class="quick-entry">
       <h1 class="section-title">入出金クイック入力</h1>
@@ -117,46 +150,9 @@
     </div>
   <% end %>
 
-  <!-- Button trigger modal -->
-  <!--
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-  -->
+  
 
-  <!-- Modal -->
-  <!--
-  <div class="modal fade" id="exampleModal" data-sample="aaaaa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">今月の収入を登録しませんか？</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <%= form_with model: @post, local: true do |f| %>
-          <div class="modal-body">
-            <div class="form-group">
-              <%= f.hidden_field :date, id: "kyuryo-date" %>
-              <%= f.hidden_field :category1, value: "4" %>
-              <%= f.hidden_field :category2, value: "17" %>
-              <%= f.hidden_field :article, value: "給料" %>
-              <%= f.label :price, '今月の収入' %>
-              <div class="row">
-                <div class="col-11"><%= f.text_field :price, class: "form-control text-right" %></div>
-                <div class="col-1 d-flex align-items-center pl-0 h5">円</div>
-              </div>
-            </div>
-            <%= f.submit '登録する', class: "btn btn-primary float-right ml-3" %>
-            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">閉じる</button>
-            <div class="clearfix"></div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  -->
+  
 
   
 </div>
@@ -172,6 +168,29 @@
   $('.header-tab li').removeClass("active");
   $('.header-tab li').eq(0).addClass("active");
 
+  $(function(){
+    var modal = document.getElementById("exampleModal");
+    var modalopen = modal.getAttribute("data-sample");
+
+    if (modalopen == "true"){
+      $('#exampleModal').addClass('show').css({'padding-right':'15px','display':'block'});
+      $('.overlay').show();
+    }
+  });
+  
+
+
+  
+
+  $('.putsession').click(function(){
+      $.ajax({
+        type: 'GET',
+        url: 'posts/modal',
+        dataType: 'json'  //json形式指定
+      });
+      $('.overlay').hide();
+      $('#exampleModal').removeClass('show').css('display','none');
+    });
 
   //クイック入力の日付部分
   function d() {

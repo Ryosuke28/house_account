@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'year'
       get 'month'
       get 'note'
+      get 'modal'
     end
   end
   

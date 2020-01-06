@@ -165,9 +165,6 @@
     $('[data-toggle="tooltip"]').tooltip()
   });
 
-  $('.header-tab li').removeClass("active");
-  $('.header-tab li').eq(0).addClass("active");
-
   $(function(){
     var modal = document.getElementById("exampleModal");
     var modalopen = modal.getAttribute("data-sample");
@@ -177,20 +174,16 @@
       $('.overlay').show();
     }
   });
-  
 
+  $('.header-tab li').removeClass("active");
+  $('.header-tab li').eq(0).addClass("active");
 
-  
-
-  $('.putsession').click(function(){
-      $.ajax({
-        type: 'GET',
-        url: 'posts/modal',
-        dataType: 'json'  //json形式指定
-      });
-      $('.overlay').hide();
-      $('#exampleModal').removeClass('show').css('display','none');
-    });
+  //クイック入力の項目部分
+  $("ul.menu li").hover(function(){
+    $(">ul:not(:animated)",this).slideDown("fast");
+  },function(){
+    $(">ul",this).slideUp("fast");
+  });
 
   //クイック入力の日付部分
   function d() {
@@ -220,56 +213,57 @@
   });
 
 
-  //クイック入力の項目部分
-  $("ul.menu li").hover(function(){
-      $(">ul:not(:animated)",this).slideDown("fast");
-    },function(){
-      $(">ul",this).slideUp("fast");
+  $('.putsession').click(function(){
+    $.ajax({
+      type: 'GET',
+      url: 'posts/modal',
+      dataType: 'json'  //json形式指定
+    });
+    $('.overlay').hide();
+    $('#exampleModal').removeClass('show').css('display','none');
   });
 
 
-  //星を降らせる
-  var hosix=Array(300);
-  var hosiy=Array(300);
-  hosix.fill(-1);
-  hosiy.fill(-1);
-  var hosicount=0;
-  var screenx=window.innerWidth;
-  var screeny=window.innerHeight;
-  var timer2=setInterval("staranime()",2);
+    //星を降らせる
+    var hosix=Array(300);
+    var hosiy=Array(300);
+    hosix.fill(-1);
+    hosiy.fill(-1);
+    var hosicount=0;
+    var screenx=window.innerWidth;
+    var screeny=window.innerHeight;
+    var timer2=setInterval("staranime()",2);
 
-  var tmp="";
-  for(var j=0;j<300;j++){
-    tmp+='<div id="s'+j+'"  style="position:fixed;z-index:-1;width:2px;height:2px;background-color:#000"></div>';
-  }
-  document.getElementById("star").innerHTML=tmp;
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-  function staranime(){
-    screenx=window.innerWidth;
-    screeny=window.innerHeight;
-    if(hosicount!=300) hosicount++;
-    for(var i=0;i<hosicount;i++){
-      if(hosix[i]==-1){
-        if(getRandomInt(4)>=2){
-          hosix[i]=getRandomInt(screenx);
-          hosiy[i]=0;
-        }else{
-          hosix[i]=0;
-          hosiy[i]=getRandomInt(screeny);
-        }
-      }
-      hosix[i]++;
-      hosiy[i]++;
-      if(hosix[i]>=screenx) hosix[i]=-1;
-      if(hosiy[i]>=screeny) hosix[i]=-1;
-      $("#s"+i).css("top",hosiy[i]);
-      $("#s"+i).css("left",hosix[i]);
+    var tmp="";
+    for(var j=0;j<300;j++){
+      tmp+='<div id="s'+j+'"  style="position:fixed;z-index:-1;width:2px;height:2px;background-color:#000"></div>';
     }
-  }
+    document.getElementById("star").innerHTML=tmp;
 
-
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    function staranime(){
+      screenx=window.innerWidth;
+      screeny=window.innerHeight;
+      if(hosicount!=300) hosicount++;
+      for(var i=0;i<hosicount;i++){
+        if(hosix[i]==-1){
+          if(getRandomInt(4)>=2){
+            hosix[i]=getRandomInt(screenx);
+            hosiy[i]=0;
+          }else{
+            hosix[i]=0;
+            hosiy[i]=getRandomInt(screeny);
+          }
+        }
+        hosix[i]++;
+        hosiy[i]++;
+        if(hosix[i]>=screenx) hosix[i]=-1;
+        if(hosiy[i]>=screeny) hosix[i]=-1;
+        $("#s"+i).css("top",hosiy[i]);
+        $("#s"+i).css("left",hosix[i]);
+      }
+    }
 
 </script>

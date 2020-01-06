@@ -1,3 +1,534 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* index */
+/* top-result */
+.top-wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+  
+.result {
+	width: 500px;
+	margin: 10px;
+	table {
+		width: 400px;
+		margin: 0 auto;
+		font-size: 20px;
+	}
+	tr {
+		height: 50px;
+	}
+	th {
+		background-color: #ddffff;
+	}
+	td {
+		background-color: white;
+		text-align: right;
+		padding-right: 20px;
+		font-weight: bold;
+	}
+}
+/* top-result終わり*/
+
+/* top-quick-entry*/
+.quick-entry {
+	width: 500px;
+	margin: 10px;
+	form {
+		background-color: #eeeeee;
+		padding: 20px;
+		border-radius: 10px;
+	}
+}
+
+.section-title {
+	font-size: 30px;
+	border-bottom: 5px solid silver;
+	margin-bottom: 15px;
+}
+
+.blue {
+	color: blue;
+}
+
+.red {
+	color: red;
+}
+  
+  
+.field {
+	width: 450px;
+	font-size: 22px;
+	margin-bottom: 5px;
+	label {
+		width: 120px;
+		float: left;
+	}
+	input {
+		height: 30px;
+		font-size: 20px;
+		border: 1px solid gray;
+	}
+	input:focus {
+		border: 1px solid blue;
+	}
+	select {
+		height: 30px;
+		font-size: 20px;
+	}
+}
+
+.actions {
+	display: flex;
+	input {
+		height: 40px;
+		width: 150px;
+		color: white;
+		font-size: 20px;
+		background-color: navy;
+		border: none;
+		border-radius: 5px;
+		display: block;
+		margin: 20px auto 0;
+	}
+	input:hover {
+		background-color: blue;
+		cursor: pointer;
+		transition: .5s;
+	}
+	a {
+		height: 40px;
+		width: 150px;
+		color: white;
+		font-size: 20px;
+		background-color: maroon;
+		border: none;
+		border-radius: 5px;
+		margin: 20px auto 0;
+		text-align: center;
+		padding-top: 7px;
+	}
+	a:hover {
+		background-color: red;
+		cursor: pointer;
+		transition: .5s;
+	}
+}
+
+/* quick-entry内 項目部分 */
+ul.menu {
+	cursor: pointer;
+	margin-bottom: 0;
+	height: 33px;
+}
+
+ul.menu:after {
+	height: 0;
+	visibility: hidden;
+	content: ".";
+	display: block;
+	clear: both;
+}
+
+ul.menu li {
+	float: left;
+	width: 154px;
+	height: 30px;
+	background-color: white;
+	position: relative;
+}
+
+ul.menu > li {
+	margin-right: 10px;
+	border: 1px solid #999;
+}
+
+ul.menu li > ul {
+	position: relative;
+	top: 1px;
+	left: -1px;
+	border: 1px solid #999;
+}
+  
+ul.menu li a {
+	display: block;
+	width: 100%;
+	height: 99%;
+	line-height: 30px;
+	font-size: 20px;
+	text-indent: 5px;
+	color: #111;
+	text-decoration: none;
+	position: relative;
+}
+
+ul.menu i {
+	float: right;
+	padding-right: 10px;
+	padding-top: 5px;
+	color: silver;
+}
+
+ul.sub li a:hover {
+	background-color: #005FFF;
+	color: white;
+}
+  
+ul.sub li {
+	float: none;
+	width: 100%;
+	border-box: 1px solid #999;
+}
+
+ul.sub li ul.sub {
+	position: absolute;
+	left: 152px;
+	top: 0;
+	z-index: 10;
+}
+
+ul.sub {
+	display: none;
+	width: 154px;
+	z-index: 10;
+}
+
+ul.sub-2 li {
+	width: 151px;
+}
+/* quick-entry内 項目部分 終わり */
+/* top-quick-entry　終わり*/
+
+/* gem カレンダー */
+.simple-calendar {	
+	width: 70%;
+	margin: 0 auto;
+	table {
+		background-color: white !important;
+	}
+	span {
+		font-size: 25px;
+		font-weight: bold;
+	}
+	th {
+		text-align: center !important;
+	}
+	.day {
+		height: 70px;
+		width: 100px;
+	}
+
+	.wday-6 {
+		background-color: #CCFFFF;
+	}
+	.wday-0 {
+		background-color: #FFDDFF;
+	}
+
+	.prev-month, .next-month {
+		background-color: #DDD;
+	}
+
+	.prev-month div {
+		display: none;
+	}
+	.next-month div {
+		display: none;
+	}
+
+	.tooltip-content {
+		display: none;
+		position: absolute;
+		border: 1px solid black;
+		width: 80px;
+		height: 50px;
+	}
+}
+
+.day-total {
+	text-align: center;
+	padding-top: 10px;
+}
+/* gem カレンダー終わり */
+/* index 終わり*/
+
+/* year */
+#cv1 {
+	margin-top: 20px;
+}
+
+.months-wrapper {
+	width: 1140px;
+	margin: 0 auto;
+	padding-right: 10px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 50px;
+}
+
+.month-index {
+	width: 55px;
+}
+    
+.month {
+	position: relative;
+	width: 16%;
+	text-align: center;
+}
+/* year 終わり */
+
+/* month */
+.month_title {
+	padding-left: 50px;
+	padding-top: 10px;
+}
+
+#cv2 {
+	margin: 0px 0;
+}
+
+.month-data, .total-data {
+	width: 1140px;
+	display: flex;
+	margin-bottom: 100px;
+}
+	
+.month-data span {
+	font-size: 40px;
+	font-weight: bold;
+	padding-top: 110px;
+}
+	
+.cost-table {
+	border: 3px solid black;
+	tr {
+	height: 40px;
+	}
+	th {
+		width: 120px;
+	}
+	td {
+		width: 120px;
+		text-align: right;
+		font-size: 18px;
+		font-weight: bold;
+		padding-right: 5px;
+	}
+}
+
+.income-table {
+	margin-right: 80px;
+	border: 4px solid black;
+}
+
+
+.heading-row {
+	font-size: 20px;
+	background-color: #ddd;
+}
+	
+.total-data {
+	table {
+		width: 200px;
+		margin-top: 22px;
+		border: 4px solid black;
+		vertical-align: bottom;
+	}
+	tr {
+		height: 50px;
+	}
+	td {
+		font-size: 20px;
+	}
+	span {
+		font-size: 40px;
+		font-weight: bold;
+		padding-top: 40px;
+		margin: 0 20px 0 450px;
+	}
+}
+
+.total-table {
+	margin-left: 130px;
+	div{
+		border: 5px solid black;
+		height: 75px;
+		width: 280px;
+		background-color:#99FF99;
+	}
+	h2 {
+		font-size: 35px;
+		text-align: right;
+		padding-top: 10px;
+		padding-right: 5px;
+	}
+}
+/* month 終わり */
+
+/* note */
+.overlay{
+	display: none;
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120%;
+	background-color: rgba(0,0,0,0.5);
+}
+  
+.new-entry {
+	display: none;
+	background-color: white;
+	width: 500px;
+	border-radius: 10px;
+	padding: 20px 30px 20px;
+	position: fixed;
+	top: 100px;
+	left: calc(50% - 250px);
+	z-index: 11;
+	form {
+		margin-top: 5px;
+	}
+}
+
+.close-btn {
+	font-size: 28px;
+	position: absolute;
+	top: 5px;
+	left: 465px;
+	color: gray;
+}
+
+ul.tab {
+	display: flex;
+	border: 1px solid black;
+	
+}
+
+ul.tab li {
+	line-height: 60px;
+	vertical-align: middle;
+	width: 50%;
+	font-size: 25px;
+	text-align: center;
+	background-color: #ccc;
+}
+  
+ul.tab li:hover {
+	cursor: pointer;
+}
+
+li.pay {
+	color: #660000;
+}
+
+li.salary {
+	color: #000055;
+}
+
+.tab li.entry-active {
+	border-bottom: none;
+	background-color: white;
+}
+
+.hide {
+	display: none;
+}
+  
+.event-btn {
+	width: 1140px;
+	margin: 20px 0 10px;
+	display: flex;
+	justify-content: space-between;
+	a:hover {
+		cursor: pointer;
+		color: white;
+	}
+}
+
+.button {
+	width: 120px;
+	height: 30px;
+	border-radius: 5px;
+	padding: 2px 15px;
+	background-color: navy;
+	font-weight: bold;
+	color: white;
+	line-height: 30px;
+}
+
+.second-btn {
+	margin-left: 550px;
+	text-align: center;
+	background-color: #CC0000;
+}
+
+.serch-btn {
+	margin-left: 20px;
+	margin-right: 50px;
+}
+  
+.serch-btn:hover {
+	cursor: pointer;
+}
+
+.calender {
+	font-size: 18px;
+	table {
+		margin: 0 auto;
+	}
+	tr {
+		height: 30px;
+	}
+	th {
+		width: 120px;
+	}
+	td {
+		width: 155px;
+		font-size: 14px;
+		padding-left: 7px;
+	}
+}
+
+.vertical-row {
+	background-color: #eee;
+}
+  
+.weekday-cell {
+	background-color: #eee;
+}
+
+.saturday-cell {
+	background-color: #CCFFFF;
+}
+
+.sunday-cell {
+	background-color: #FFDDFF;
+}
+
+.black-cell {
+	background-color: black;
+	color: white;
+}
+
+	.left-justify {
+	text-align: right;
+	padding-right: 7px;
+}
+/* note 終わり */
+
+/* edit */
+.edit-entry {
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+  padding: 20px 30px 20px;
+	margin: 0 auto;
+  form {
+    margin-top: 5px;
+  }
+}
+/* edit 終わり */

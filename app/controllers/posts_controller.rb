@@ -88,16 +88,6 @@ class PostsController < ApplicationController
   def year
     # 現在の日付を取得。これを基準に過去6ヶ月の内容を取得する。
     @baseday = Date.today
-    # @posts = []
-
-    # index = 5
-    # 6.times do
-    #   post = current_user.posts.where(date: @baseday.prev_month(index).in_time_zone.all_month)
-    #   post.total_view(@posts)
-    # end
-
-
-
 
 
 

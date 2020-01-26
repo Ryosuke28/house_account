@@ -2,174 +2,102 @@
 
 <div class="container">
 <h1 class="month_title"><%= "#{@d.year}年#{@d.month}月" %></h1>
+  <!-- 円グラフ -->
   <canvas class="" id="cv2" height="500" width="1140"></canvas>
+
+  <!-- 諸費用テーブル -->
   <div class="month-data">
+
+
+    <!-- 総収入 -->
     <table class="cost-table income-table" border="1">
       <tr>
         <th class="heading-row text-center" colspan="2">総収入</th>
       </tr>
       <tr>
         <th class="text-center">給料</th>
-        <td><%= @kyuuryou %>円</td>
+        <td><%= @goukei[:kyuuryou] %>円</td>
       </tr>
-      <tr>
-        <% if @sonota_2s[0] %>
-          <th class="text-center"><%= @sonota_2s[0].article %></th>
-          <td><%= @sonota_2s[0].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
-      <tr>
-        <% if @sonota_2s[1] %>
-          <th class="text-center"><%= @sonota_2s[1].article %></th>
-          <td><%= @sonota_2s[1].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
-      <tr>
-        <% if @sonota_2s[2] %>
-          <th class="text-center"><%= @sonota_2s[2].article %></th>
-          <td><%= @sonota_2s[2].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
+      <% 3.times do |i| %>
+        <tr>
+          <% if @sonota_2s[i] %>
+            <th class="text-center"><%= @sonota_2s[i].article %></th>
+            <td><%= @sonota_2s[i].price %>円</td>
+          <% else %>
+            <th></th>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
       <tr>
         <th class="text-center">合計</th>
-        <td><%= @kyuuryou+@sonota_2 %>円</td>
+        <td><%= @goukei[:kyuuryou] + @goukei[:sonota_2] %>円</td>
       </tr>
     </table>
+
+
+    <!-- 生活費 -->
     <table class="cost-table" border="1">
       <tr>
         <th class="heading-row text-center" colspan="2">生活費</th>
       </tr>
-      <tr>
-        <th class="text-center">食費</th>
-        <td><%= @syokuhi %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">日用品</th>
-        <td><%= @nitiyouhin %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">衣服・美容費</th>
-        <td><%= @ihuku %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">娯楽費</th>
-        <td><%= @goraku %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">交通費</th>
-        <td><%= @koutuu %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">教養費</th>
-        <td><%= @kyouyou %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">医療費</th>
-        <td><%= @iryou %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">交際費</th>
-        <td><%= @kousai %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">その他</th>
-        <td><%= @sonota_1 %>円</td>
-      </tr>
-      <tr>
+      <% @category2.slice(0..8).each_with_index do |cate, i| %>
+        <tr>
+          <th class="text-center"><%= @labels[i] %></th>
+          <td><%= @goukei[cate] %>円</td>
+        </tr>
+      <% end %>
         <th class="text-center">合計</th>
-        <td><%= @seikatu_sum %>円</td>
+        <td><%= @bigcate_sum[:seikatuhi] %>円</td>
       </tr>
     </table>
     <span>＋</span>
+
+
+    <!-- 特別支出 -->
     <table class="cost-table" border="1">
       <tr>
         <th class="heading-row text-center" colspan="2">特別支出</th>
       </tr>
-      <tr>
-        <% if @tokubetus[0] %>
-          <th class="text-center"><%= @tokubetus[0].article %></th>
-          <td><%= @tokubetus[0].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
-      <tr>
-        <% if @tokubetus[1] %>
-          <th class="text-center"><%= @tokubetus[1].article %></th>
-          <td><%= @tokubetus[1].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
-      <tr>
-        <% if @tokubetus[2] %>
-          <th class="text-center"><%= @tokubetus[2].article %></th>
-          <td><%= @tokubetus[2].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
-      <tr>
-        <% if @tokubetus[3] %>
-          <th class="text-center"><%= @tokubetus[3].article %></th>
-          <td><%= @tokubetus[3].price %>円</td>
-        <% else %>
-          <th></th>
-          <td></td>
-        <% end %>
-      </tr>
+      <% 4.times do |i| %>
+        <tr>
+          <% if @tokubetus[i] %>
+            <th class="text-center"><%= @tokubetus[i].article %></th>
+            <td><%= @tokubetus[i].price %>円</td>
+          <% else %>
+            <th></th>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
       <tr>
         <th class="text-center">合計</th>
-        <td><%= @tokubetu_sum %>円</td>
+        <td><%= @bigcate_sum[:tokubetusisyutu] %>円</td>
       </tr>
     </table>
     <span>＋</span>
+
+
+    <!-- 固定費 -->
     <table class="cost-table" border="1">
       <tr>
         <th class="heading-row text-center" colspan="2">固定費</th>
       </tr>
-      <tr>
-        <th class="text-center">住居費</th>
-        <td><%= @juukyo %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">電気代</th>
-        <td><%= @denki %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">ガス代</th>
-        <td><%= @gasu %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">水道代</th>
-        <td><%= @suidou %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">通信・電話代</th>
-        <td><%= @tuusin %>円</td>
-      </tr>
-      <tr>
-        <th class="text-center">携帯電話代</th>
-        <td><%= @keitai %>円</td>
-      </tr>
+      <% @category2.slice(10..15).each_with_index do |cate, i| %>
+        <tr>
+          <th class="text-center"><%= @labels[i+10] %></th>
+          <td><%= @goukei[cate] %>円</td>
+        </tr>
+      <% end %>
       <tr>
         <th class="text-center">合計</th>
-        <td><%= @kotei_sum %>円</td>
+        <td><%= @bigcate_sum[:koteihi] %>円</td>
       </tr>
     </table>
   </div>
+
+
+  <!-- 今月の収支 -->
   <div class="total-data">
     <span>=</span>
     <table class="cost-table" border="1">
@@ -177,13 +105,12 @@
         <th class="heading-row text-center">総支出</th>
       </tr>
       <tr>
-        <td><%= @sousisyutu %>円</td>
+        <td><%= @bigcate_sum.values.sum %>円</td>
       </tr>
-      
     </table>
     <div class="total-table">
       <h1><%= @d.month %>月の収支は</h1>
-      <div><h2><%= @kyuuryou + @sonota_2 - @sousisyutu %>円</h2></div>
+      <div><h2><%= @goukei[:kyuuryou] + @goukei[:sonota_2] - @bigcate_sum.values.sum %>円</h2></div>
     </div>
   </div>
 </div>
@@ -200,8 +127,7 @@
       labels: ["食費", "日用品", "衣服・美容費", "娯楽費", "交通費", "教養費", "医療費", "交際費", "その他", "特別支出", "住居費", "電気代", "ガス代", "水道代", "通信・電話代", "携帯電話代"],
       datasets: [{
         backgroundColor: ["blue", "lime", "yellow", "pink", "aqua", "fuchsia", "olive", "navy", "silver", "red", "green", "maroon", "fuchsia", "blue", "purple", "teal"],
-        data: [<%= @syokuhi %>, <%= @nitiyouhin %>, <%= @ihuku %>, <%= @goraku %>, <%= @koutuu %>, <%= @kyouyou %>, <%= @iryou %>, <%= @kousai %>, <%= @sonota_1 %>,
-               <%= @tokubetu_sum %>, <%= @juukyo %>, <%= @denki %>, <%= @gasu %>, <%= @suidou %>, <%= @tuusin %>, <%= @keitai %>]
+        data: <%= @goukei.values.slice(0..15) %>
       }]
     },
     options: {
@@ -216,5 +142,4 @@
       }
     }
   });
-
 </script>

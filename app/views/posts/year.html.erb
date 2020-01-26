@@ -2,127 +2,58 @@
 
 <div class="container">
 
+  <!-- 棒グラフ -->
   <canvas id="cv1" height="560" width="1140"></canvas>
   
+  <!-- 各月のデータ -->
   <div class="months-wrapper">
     <div class="month-index">
       <h3>収入</h3>
       <h3>支出</h3>
       <h3>収支</h3>
     </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu1 %>円</h3>
-      <h3 class="red"><%= @sousisyutu1 %>円</h3>
-      <h3><%= @sousyunyu1 - @sousisyutu1 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(5).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(5)}" %>
-    </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu2 %>円</h3>
-      <h3 class="red"><%= @sousisyutu2 %>円</h3>
-      <h3><%= @sousyunyu2 - @sousisyutu2 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(4).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(4)}" %>
-    </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu3 %>円</h3>
-      <h3 class="red"><%= @sousisyutu3 %>円</h3>
-      <h3><%= @sousyunyu3 - @sousisyutu3 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(3).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(3)}" %>
-    </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu4 %>円</h3>
-      <h3 class="red"><%= @sousisyutu4 %>円</h3>
-      <h3><%= @sousyunyu4 - @sousisyutu4 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(2).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(2)}" %>
-    </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu5 %>円</h3>
-      <h3 class="red"><%= @sousisyutu5 %>円</h3>
-      <h3><%= @sousyunyu5 - @sousisyutu5 %>円</h3>
-      <%= link_to "#{@baseday.prev_month(1).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(1)}" %>
-    </div>
-    <div class="month">
-      <h3 class="blue"><%= @sousyunyu6 %>円</h3>
-      <h3 class="red"><%= @sousisyutu6 %>円</h3>
-      <h3><%= @sousyunyu6 - @sousisyutu6 %>円</h3>
-      <%= link_to "#{@baseday.month}月詳細へ", "/posts/month?date=#{@baseday}" %>
-    </div>
+    <% 6.times do |i| %>
+      <div class="month">
+        <h3 class="blue"><%= @each_month_data[-i-1][:sousyunyu] %>円</h3>
+        <h3 class="red"><%= @each_month_data[-i-1][:sousisyutu] %>円</h3>
+        <h3><%= @each_month_data[-i-1][:sousyunyu] - @each_month_data[-i-1][:sousisyutu] %>円</h3>
+        <%= link_to "#{@baseday.prev_month(5-i).month}月詳細へ", "/posts/month?date=#{@baseday.prev_month(5-i)}" %>
+      </div>
+    <% end %>
   </div>
 </div>
+
 
 <script>
   $('.header-tab li').removeClass("active");
   $('.header-tab li').eq(1).addClass("active");
 
   var ctx = document.getElementById('cv1').getContext('2d');
+  var cate_labels = [["食費", "blue"] ,["日用品", "lime"], ["衣服・美容費","yellow"], ["娯楽費", "pink"], ["交通費", "aqua"], ["教養費", "fuchsia"], 
+                      ["医療費", "olive"], ["交際費", "navy"], ["その他", "silver"], ["特別支出", "red"], ["住居費", "green"], ["電気代", "maroon"], 
+                      ["ガス代", "fuchsia"], ["水道代", "blue"], ["通信・電話代", "purple"], ["携帯電話代", "teal"]]
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['<%= @baseday.prev_month(5).month %>月', '<%= @baseday.prev_month(4).month %>月', '<%= @baseday.prev_month(3).month %>月', '<%= @baseday.prev_month(2).month %>月', '<%= @baseday.prev_month(1).month %>月', '<%= @baseday.month %>月'],
-      datasets: [{
-        label: '食費',
-        data: [<%= @syokuhi1 %>, <%= @syokuhi2 %>, <%= @syokuhi3 %>, <%= @syokuhi4 %>, <%= @syokuhi5 %>,  <%= @syokuhi6 %>],
-        backgroundColor: "blue"
-      }, {
-        label: '日用品',
-        data: [<%= @nitiyouhin1 %>, <%= @nitiyouhin2 %>, <%= @nitiyouhin3 %>, <%= @nitiyouhin4 %>, <%= @nitiyouhin5 %>,  <%= @nitiyouhin6 %>],
-        backgroundColor: "lime"
-      }, {
-        label: '衣服・美容費',
-        data: [<%= @ihuku1 %>, <%= @ihuku2 %>, <%= @ihuku3 %>, <%= @ihuku4 %>, <%= @ihuku5 %>, <%= @ihuku6 %>],
-        backgroundColor: "yellow"
-      }, {
-        label: '娯楽費',
-        data: [<%= @goraku1 %>, <%= @goraku2 %>, <%= @goraku3 %>, <%= @goraku4 %>, <%= @goraku5 %>, <%= @goraku6 %>],
-        backgroundColor: "pink"
-      }, {
-        label: '交通費',
-        data: [<%= @koutuu1 %>, <%= @koutuu2 %>, <%= @koutuu3 %>, <%= @koutuu4 %>, <%= @koutuu5 %>, <%= @koutuu6 %>],
-        backgroundColor: "aqua"
-      }, {
-        label: '教養費',
-        data: [<%= @kyouyou1 %>, <%= @kyouyou2 %>, <%= @kyouyou3 %>, <%= @kyouyou4 %>, <%= @kyouyou5 %>, <%= @kyouyou6 %>],
-        backgroundColor: "fuchsia"
-      }, {
-        label: '医療費',
-        data: [<%= @iryou1 %>, <%= @iryou2 %>, <%= @iryou3 %>, <%= @iryou4 %>, <%= @iryou5 %>, <%= @iryou6 %>],
-        backgroundColor: "olive"
-      }, {
-        label: '交際費',
-        data: [<%= @kousai1 %>, <%= @kousai2 %>, <%= @kousai3 %>, <%= @kousai4 %>, <%= @kousai5 %>, <%= @kousai6 %>],
-        backgroundColor: "navy"
-      }, {
-        label: 'その他',
-        data: [<%= @sonota_1_1 %>, <%= @sonota_1_2 %>, <%= @sonota_1_3 %>, <%= @sonota_1_4 %>, <%= @sonota_1_5 %>, <%= @sonota_1_6 %>],
-        backgroundColor: "silver"
-      }, {
-        label: '特別支出',
-        data: [<%= @tokubetu1 %>, <%= @tokubetu2 %>, <%= @tokubetu3 %>, <%= @tokubetu4 %>, <%= @tokubetu5 %>, <%= @tokubetu6 %>],
-        backgroundColor: "red"
-      }, {
-        label: '住居費',
-        data: [<%= @juukyo1 %>, <%= @juukyo2 %>, <%= @juukyo3 %>, <%= @juukyo4 %>, <%= @juukyo5 %>, <%= @juukyo6 %>],
-        backgroundColor: "green"
-      }, {
-        label: '電気代',
-        data: [<%= @denki1 %>, <%= @denki2 %>, <%= @denki3 %>, <%= @denki4 %>, <%= @denki5 %>, <%= @denki6 %>],
-        backgroundColor: "maroon"
-      }, {
-        label: 'ガス代',
-        data: [<%= @gasu1 %>, <%= @gasu2 %>, <%= @gasu3 %>, <%= @gasu4 %>, <%= @gasu5 %>, <%= @gasu6 %>],
-        backgroundColor: "fuchsia"
-      }, {
-        label: '水道代',
-        data: [<%= @suidou1 %>, <%= @suidou2 %>, <%= @suidou3 %>, <%= @suidou4 %>, <%= @suidou5 %>, <%= @suidou6 %>],
-        backgroundColor: "blue"
-      }, {
-        label: '通信・電話代',
-        data: [<%= @tuusin1 %>, <%= @tuusin2 %>, <%= @tuusin3 %>, <%= @tuusin4 %>, <%= @tuusin5 %>, <%= @tuusin6 %>],
-        backgroundColor: "purple"
-      }, {
-        label: '携帯電話代',
-        data: [<%= @keitai1 %>, <%= @keitai2 %>, <%= @keitai3 %>, <%= @keitai4 %>, <%= @keitai5 %>, <%= @keitai6 %>],
-        backgroundColor: "teal"
-      }]},
+      labels: [
+        <% 6.times do |month_num| %>
+          '<%= @baseday.prev_month(5-month_num).month %>月',
+        <% end %>
+      ],
+      datasets: [
+        <% @labels.each_with_index do |label, label_num| %>
+          {
+            label: cate_labels[<%= label_num %>][0],
+            data: [
+              <% 6.times do |month_num| %>
+                <%= @each_month_data[-month_num-1][@category2[label_num]] %>,
+              <% end %>
+              ],
+            backgroundColor: cate_labels[<%= label_num %>][1]
+          },
+        <% end %>
+      ]
+    },
     options: {
       responsive: false,
       scales: {

@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
 	belongs_to :user
 
+	validates :date, presence: true
+	validates :price, presence: true
 	validates :category1, presence: true
 	validate :validate_category2_presence
 

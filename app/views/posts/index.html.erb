@@ -74,8 +74,8 @@
 
         <div class="field">
 					<%= f.label :category1, '項目' %>
-					<%= f.hidden_field :category1, id: "category1" %>
-					<%= f.hidden_field :category2, id: "category2" %>
+					<%= f.hidden_field :category1, id: "category1",required:true %>
+					<%= f.hidden_field :category2, id: "category2",required:true %>
             <ul class="menu">
               <li><a id="menuA">未選択 <i class="fas fa-caret-down"></i></a>
                 <ul class="sub">
@@ -117,13 +117,13 @@
 
         <div class="field">
 					<%= f.label :price, '支出金額' %>
-					<%= f.text_field :price %><span> 円</span>
+					<%= f.number_field :price,:style=>"text-align:right",size:20,maxlength:8,required:true %><span> 円</span>
         </div>
         <div style="clear:both"></div>
         
         <div class="field">
 					<%= f.label :article, 'メモ' %>
-					<%= f.text_field :article %>
+					<%= f.text_field :article,size:20,maxlength:20 %>
         </div>
         <div style="clear:both"></div>
         <div class="actions">

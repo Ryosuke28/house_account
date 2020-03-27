@@ -76,13 +76,13 @@
     <div class="field tab-change">
 			<%= f.label :price, '支出金額', class: "tab-0" %>
 			<%= f.label :price, '収入金額', class: "tab-1 hide" %>
-			<%= f.text_field :price %><span> 円</span>
+			<%= f.number_field :price,:style=>"text-align:right",size:20,maxlength:8,required:true %><span> 円</span>
 		</div>
     <div style="clear:both"></div>
     
     <div class="field">
 			<%= f.label :article, 'メモ' %>
-			<%= f.text_field :article %>
+			<%= f.text_field :article,size:20,maxlength:20 %>
     </div>
     <div style="clear:both"></div>
     
